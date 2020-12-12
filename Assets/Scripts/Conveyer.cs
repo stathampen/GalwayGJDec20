@@ -7,6 +7,17 @@ public class Conveyer : MonoBehaviour
 	private Vector3 _direction;
 	private readonly List<Rigidbody> _bodiesToPush = new List<Rigidbody>(16);
 
+	public void RemoveRigidbody(Bottle bottleToRemove)
+	{
+		var index = _bodiesToPush.FindIndex(rigidBody => rigidBody.GetInstanceID() ==
+			bottleToRemove.body.GetInstanceID());
+
+		if (index > -1)
+		{
+			_bodiesToPush.RemoveAt(index);
+		}
+	}
+
 	private void Awake()
 	{
 		_direction = transform.forward;
@@ -24,22 +35,22 @@ public class Conveyer : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		var component = other.GetComponent<Rigidbody>();
 		var bottle = other.GetComponent<Bottle>();
 
-		if (component && bottle)
+		if (bottle)
 		{
-			_bodiesToPush.Add(component);
+			Debug.Log("adding body");
+			_bodiesToPush.Add(bottle.body);
 		}
 	}
 
 	private void OnTriggerExit(Collider other)
 	{
-		var component = other.GetComponent<Rigidbody>();
 		var bottle = other.GetComponent<Bottle>();
-		if (component && bottle)
+		if (bottle)
 		{
-			_bodiesToPush.Remove(component);
+			Debug.Log("removing body");
+			RemoveRigidbody(bottle);
 		}
 	}
 }

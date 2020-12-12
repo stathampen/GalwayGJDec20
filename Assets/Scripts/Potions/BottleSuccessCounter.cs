@@ -23,7 +23,7 @@ public class BottleSuccessCounter : MonoBehaviour
 			_currentCount++;
 		}
 
-		Destroy(bottle.gameObject);
+		bottle.gameObject.SetActive(false);
 
 		if (_currentCount == numberToBeat)
 		{
