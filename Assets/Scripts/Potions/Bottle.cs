@@ -11,7 +11,7 @@ public class Bottle : MonoBehaviour
 
 	public Rigidbody body;
 
-	private BottleFailureCounter _bottleFailureCounter;
+	private LevelController levelController;
 
 	public Potion Potion
 	{
@@ -25,9 +25,9 @@ public class Bottle : MonoBehaviour
 		Debug.Log("We have grabbed the bottle");
 	}
 
-	public void Init(BottleFailureCounter failureCounter)
+	public void Init(LevelController levelController)
 	{
-		_bottleFailureCounter = failureCounter;
+		this.levelController = levelController;
 	}
 
 	public void SetPotion(int potionNumber)
