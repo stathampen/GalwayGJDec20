@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Bottle : MonoBehaviour
 {
 	public Potion [] potionArray;
@@ -8,6 +9,16 @@ public class Bottle : MonoBehaviour
 	public GameObject bottleModel;
 
 	public Material currentMaterial;
+
+	public Rigidbody body;
+
+
+	public void setPotion(int potionNumber)
+	{
+		//call this function from other scripts
+		setMaterial(potionArray[potionNumber].potionMaterial);
+	}
+
 
 	private void Start() {
 		if(potionArray.Length > 0)
@@ -29,12 +40,15 @@ public class Bottle : MonoBehaviour
         meshRenderer.material = newMaterial;
 	}
 
-	public void setPotion(int potionNumber)
+	private void OnCollisionEnter(Collision other)
 	{
-		//call this function from other scripts
-		setMaterial(potionArray[potionNumber].potionMaterial);
+		var conveyer = other.gameObject.GetComponent<Conveyer>();
+		// todo also check if colliding with player
+		if (!conveyer)
+		{
+			Destroy(this);
+		}
 	}
-
 
 }
 
