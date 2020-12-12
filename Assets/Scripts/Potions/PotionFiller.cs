@@ -8,7 +8,7 @@ public class PotionFiller : MonoBehaviour
 	private void OnTriggerEnter(Collider other)
 	{
 		var bottle = other.GetComponent<Bottle>();
-		
+
 		if (bottle)
 		{
 			Debug.Log(bottle.GetPotion());
@@ -24,8 +24,7 @@ public class PotionFiller : MonoBehaviour
 						setNewPotion(bottle, "Cyan");
 					if(potion.name == "Red")
 						setNewPotion(bottle, "Magenta");
-					
-				break;
+					break;
 
 				case "Red":
 					//currently Red
@@ -33,8 +32,7 @@ public class PotionFiller : MonoBehaviour
 						setNewPotion(bottle, "Yellow");
 					if(potion.name == "Blue")
 						setNewPotion(bottle, "Magenta");
-					
-				break;
+					break;
 
 				case "Green":
 					//currently Green
@@ -42,14 +40,11 @@ public class PotionFiller : MonoBehaviour
 						setNewPotion(bottle, "Yellow");
 					if(potion.name == "Blue")
 						setNewPotion(bottle, "Cyan");
-					
-				break;
-				
+					break;
+
 				default:
-
-					Debug.Log("You've already mixed");
-
-				break;
+					bottle.BreakBottle(false);
+					break;
 			}
 		}
 	}
