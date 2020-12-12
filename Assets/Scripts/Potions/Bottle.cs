@@ -13,16 +13,36 @@ public class Bottle : MonoBehaviour
 
 	private BottleFailureCounter _bottleFailureCounter;
 
+	private Transform _transformToFollow;
+
 	public Potion Potion
 	{
 		get;
 		private set;
 	}
 
-	public void GrabBottle()
+	public void Grab(Transform transformToFollow)
 	{
-		// todo something
-		Debug.Log("We have grabbed the bottle");
+		body.position = transformToFollow.position;
+		body.isKinematic = true;
+		body.useGravity = false;
+		body.velocity = Vector3.zero;
+		_transformToFollow = transformToFollow;
+		body.mass = 0;
+		body.detectCollisions = false;
+		body.Sleep();
+	}
+
+	public void Drop(Vector3 dropPosition)
+	{
+		body.isKinematic = false;
+		body.useGravity = true;
+		Debug.Log("We have dropped the bottle");
+		_transformToFollow = null;
+		body.mass = 1;
+		body.detectCollisions = true;
+		body.WakeUp();
+		body.position = dropPosition;
 	}
 
 	public void Init(BottleFailureCounter failureCounter)
@@ -54,11 +74,17 @@ public class Bottle : MonoBehaviour
 	{
 		var meshRenderer = bottleModel.GetComponent<MeshRenderer>();
         // Get the current material applied on the GameObject
-        // todo do something with this?
-        var oldMaterial = meshRenderer.material;
         // Set the new material on the GameObject
         meshRenderer.material = newMaterial;
         currentMaterial = meshRenderer.material;
+	}
+
+	private void Update()
+	{
+		if (_transformToFollow && body.isKinematic)
+		{
+			transform.position = _transformToFollow.position;
+		}
 	}
 
 	private void OnCollisionEnter(Collision other)
