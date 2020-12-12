@@ -9,5 +9,13 @@ public class Quit : MonoBehaviour
 			Application.Quit();
 		}
 	}
+
+	public void QuitGame()
+	{
+		if (!Application.isEditor)
+		{
+			Application.Quit();
+		}
+	}
 }
 
