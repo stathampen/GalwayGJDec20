@@ -11,9 +11,8 @@ public class Bottle : MonoBehaviour
 
 	public Rigidbody body;
 
+	private LevelController levelController;
 	[SerializeField] private GameObject explosionPrefab;
-
-	private BottleFailureCounter _bottleFailureCounter;
 
 	private Transform _transformToFollow;
 
@@ -49,9 +48,9 @@ public class Bottle : MonoBehaviour
 		body.position = dropPosition;
 	}
 
-	public void Init(BottleFailureCounter failureCounter)
+	public void Init(LevelController levelController)
 	{
-		_bottleFailureCounter = failureCounter;
+		this.levelController = levelController;
 	}
 
 	public void SetPotion(int potionNumber)
@@ -68,16 +67,12 @@ public class Bottle : MonoBehaviour
 
 	public void BreakBottle(bool dropped)
 	{
-		if (dropped)
-		{
+		//if the user has dropped the bottle of mixed the wrong potion it should explode
+		var explosion = Instantiate(explosionPrefab, transform.position, transform.rotation).GetComponent<Explosion>();
+		explosion.Explode();
 
-		}
-		else
-		{
-			var explosion = Instantiate(explosionPrefab, transform.position, transform.rotation).GetComponent<Explosion>();
-			explosion.Explode();
-		}
-		_bottleFailureCounter.AddFailure(this);
+		levelController.failedPotion();
+
 		gameObject.SetActive(false);
 	}
 
@@ -112,7 +107,6 @@ public class Bottle : MonoBehaviour
 		var tag = other.gameObject.tag;
 		if (tag == "Floor")
 		{
-			_bottleFailureCounter.AddFailure(this);
 			BreakBottle(gameObject);
 		}
 	}
