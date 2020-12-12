@@ -10,14 +10,19 @@ public class PotionFiller : MonoBehaviour
 		var bottle = other.GetComponent<Bottle>();
 		if (bottle)
 		{
-			Array.Resize(ref bottle.potions, bottle.potions.Length + 1);
-			bottle.potions[bottle.potions.Length - 1] = potion;
-			bottle.SetPotion(bottle.potions.Length - 1);
-			var potionBehaviour = bottle.gameObject.AddComponent<PotionBehaviour>();
-			potionBehaviour.potionMaterials = new Material[bottle.potions.Length];
+			var success = false;
 			for (var i = 0; i < bottle.potions.Length; i++)
 			{
-				potionBehaviour.potionMaterials[i] = bottle.potions[i].potionMaterial;
+				if (potion.name == bottle.potions[i].name)
+				{
+					bottle.SetPotion(i);
+					success = true;
+				}
+			}
+
+			if (!success)
+			{
+				throw new Exception("Potion assigned here is not available in bottle prefab");
 			}
 		}
 	}

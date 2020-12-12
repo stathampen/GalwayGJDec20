@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &30818581597857705
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 803520875640880403}
-  m_Layer: 0
-  m_Name: Bottle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &803520875640880403
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 30818581597857705}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2208844047094562072}
-  m_Father: {fileID: 9196909645418508817}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8195131146078874293
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,11 +25,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8195131146078874293}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 1.0800354, z: 0}
-  m_LocalScale: {x: 22.627426, y: 22.627426, z: 22.627426}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 1.0800354, z: 0}
+  m_LocalScale: {x: 22.627426, y: 22.627424, z: 22.627424}
   m_Children: []
-  m_Father: {fileID: 803520875640880403}
+  m_Father: {fileID: 9196909645418508817}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4284566829896808676
@@ -126,7 +95,7 @@ GameObject:
   - component: {fileID: 1863911392}
   m_Layer: 0
   m_Name: Bottle
-  m_TagString: Untagged
+  m_TagString: PotionBottle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,9 +109,9 @@ Transform:
   m_GameObject: {fileID: 9196909645418508819}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
-  - {fileID: 803520875640880403}
+  - {fileID: 2208844047094562072}
   - {fileID: 9196909645688898076}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -159,8 +128,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d34b36f0d694bf89256a4f939781e25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potions: []
-  bottleModel: {fileID: 30818581597857705}
+  potions:
+  - {fileID: 11400000, guid: ae155e265aad4114f93d94ba9b69c8c0, type: 2}
+  - {fileID: 11400000, guid: 6a29a211626af5a46be8044ab19580d0, type: 2}
+  - {fileID: 11400000, guid: 52cb3c8cbd1c937419ba92bf9c097920, type: 2}
+  - {fileID: 11400000, guid: fb55fed6fd556f64ba70dd7df87d1dd5, type: 2}
+  bottleModel: {fileID: 8195131146078874293}
   currentMaterial: {fileID: 0}
   body: {fileID: 1863911393}
 --- !u!54 &1863911393

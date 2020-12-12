@@ -61,8 +61,7 @@ MonoBehaviour:
   numberToBeat: 30
   levelController: {fileID: 1180046487614346648}
   bottleFailureCounter: {fileID: 1180046487614346631}
-  typesWanted:
-  - {fileID: 11400000, guid: fb55fed6fd556f64ba70dd7df87d1dd5, type: 2}
+  typesWanted: {fileID: 11400000, guid: fb55fed6fd556f64ba70dd7df87d1dd5, type: 2}
 --- !u!1 &1180046486994779109
 GameObject:
   m_ObjectHideFlags: 0
