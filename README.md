@@ -1,4 +1,4 @@
-# Galway Game Jam - December 2020<
+# Galway Game Jam - December 2020
 
 Contributors:
 
@@ -7,4 +7,6 @@ Contributors:
 [Alexander Statham](https://github.com/stathampen)
 
 [Sophia](https://github.com/Cosmic-Sophia)
+
+[Helen Lynch](https://github.com/hellylovesgames)
 
