@@ -22,7 +22,6 @@ public class PotionFiller : MonoBehaviour
 					//currently Blue
 					if(potion.name == "Green")
 						setNewPotion(bottle, "Cyan");
-
 					if(potion.name == "Red")
 						setNewPotion(bottle, "Magenta");
 					
@@ -32,8 +31,6 @@ public class PotionFiller : MonoBehaviour
 					//currently Red
 					if(potion.name == "Green")
 						setNewPotion(bottle, "Yellow");
-
-
 					if(potion.name == "Blue")
 						setNewPotion(bottle, "Magenta");
 					
