@@ -1,8 +1,8 @@
 using UnityEngine;
 
-[System.Serializable]
-public class Potion
+[CreateAssetMenu(fileName = "Potion", menuName = "ScriptableObjects/PotionInstance")]
+public class Potion : ScriptableObject
 {
-	public string name;
+	public string potionName;
 	public Material potionMaterial;
 }
