@@ -7,46 +7,48 @@ public class PotionFiller : MonoBehaviour
 	[SerializeField] private Potion potion;
 	private void OnTriggerEnter(Collider other)
 	{
-		var bottle = other.GetComponent<Bottle>();
+		if(other.gameObject.tag == "PotionBottle")
+        {
+			var bottle = other.GetComponent<Bottle>();
 
-		if (bottle)
-		{
-			Debug.Log(bottle.GetPotion());
-			switch (bottle.GetPotion())
+			if (bottle)
 			{
-				case "Empty":
-					setNewPotion(bottle, potion.name);
-				break;
-
-				case "Blue":
-					//currently Blue
-					if(potion.name == "Green")
-						setNewPotion(bottle, "Cyan");
-					if(potion.name == "Red")
-						setNewPotion(bottle, "Magenta");
+				switch (bottle.GetPotion())
+				{
+					case "Empty":
+						setNewPotion(bottle, potion.name);
 					break;
 
-				case "Red":
-					//currently Red
-					if(potion.name == "Green")
-						setNewPotion(bottle, "Yellow");
-					if(potion.name == "Blue")
-						setNewPotion(bottle, "Magenta");
-					break;
+					case "Blue":
+						//currently Blue
+						if(potion.name == "Green")
+							setNewPotion(bottle, "Cyan");
+						if(potion.name == "Red")
+							setNewPotion(bottle, "Magenta");
+						break;
 
-				case "Green":
-					//currently Green
-					if(potion.name == "Red")
-						setNewPotion(bottle, "Yellow");
-					if(potion.name == "Blue")
-						setNewPotion(bottle, "Cyan");
-					break;
+					case "Red":
+						//currently Red
+						if(potion.name == "Green")
+							setNewPotion(bottle, "Yellow");
+						if(potion.name == "Blue")
+							setNewPotion(bottle, "Magenta");
+						break;
 
-				default:
-					bottle.BreakBottle(false);
-					break;
+					case "Green":
+						//currently Green
+						if(potion.name == "Red")
+							setNewPotion(bottle, "Yellow");
+						if(potion.name == "Blue")
+							setNewPotion(bottle, "Cyan");
+						break;
+
+					default:
+						bottle.BreakBottle(false);
+						break;
+				}
 			}
-		}
+        }
 	}
 
 	private void setNewPotion(Bottle bottle, String newPotionName)
