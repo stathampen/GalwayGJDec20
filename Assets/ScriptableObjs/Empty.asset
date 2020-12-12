@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd375c9b2904a5d96553bb6b1b89e04, type: 3}
   m_Name: Empty
   m_EditorClassIdentifier: 
-  potionName: 
-  potionMaterial: {fileID: 0}
+  potionName: Empty
+  potionMaterial: {fileID: 2100000, guid: 50de10876d1b8a240bf8f3bf1ab1676a, type: 2}
