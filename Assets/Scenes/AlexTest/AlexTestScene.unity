@@ -235,13 +235,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d34b36f0d694bf89256a4f939781e25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potion:
+  potionArray:
+  - Name: Empty
+    potionMaterial: {fileID: 2100000, guid: 50de10876d1b8a240bf8f3bf1ab1676a, type: 2}
   - Name: Blue
     potionMaterial: {fileID: 2100000, guid: e99a7292b1609784cb67164a7dd6a1d8, type: 2}
-  - Name: Green
-    potionMaterial: {fileID: 2100000, guid: 43abd31c45b50604d9b22afe0366e492, type: 2}
   - Name: Red
     potionMaterial: {fileID: 2100000, guid: a43bc28a60abce44cae25d2eba6ea5a4, type: 2}
+  - Name: Green
+    potionMaterial: {fileID: 2100000, guid: 43abd31c45b50604d9b22afe0366e492, type: 2}
+  bottleModel: {fileID: 557448274}
+  currentMaterial: {fileID: 0}
 --- !u!4 &286772318
 Transform:
   m_ObjectHideFlags: 0
@@ -322,7 +326,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e99a7292b1609784cb67164a7dd6a1d8, type: 2}
+  - {fileID: 2100000, guid: 43abd31c45b50604d9b22afe0366e492, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

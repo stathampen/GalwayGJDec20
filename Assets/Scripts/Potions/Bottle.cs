@@ -3,26 +3,25 @@ using System.Collections;
 
 public class Bottle : MonoBehaviour
 {
-	public Potion [] potion;
+	public Potion [] potionArray;
 
 	public GameObject bottleModel;
 
 	public Material currentMaterial;
 
 	private void Start() {
-		if(potion.Length > 0)
-		{		Debug.Log("Checiking Material");
-			setMaterial(potion[0].potionMaterial);
+		if(potionArray.Length > 0)
+		{	
+			setMaterial(potionArray[0].potionMaterial);
 		}
 	}
 
 	private void Update() {
-		
+
 	}
 
 	private void setMaterial(Material newMaterial)
 	{
-		Debug.Log("setting Material");
 		MeshRenderer meshRenderer = bottleModel.GetComponent<MeshRenderer>();
         // Get the current material applied on the GameObject
         Material oldMaterial = meshRenderer.material;
@@ -30,6 +29,12 @@ public class Bottle : MonoBehaviour
         meshRenderer.material = newMaterial;
 	}
 
-	
+	public void setPotion(int potionNumber)
+	{
+		//call this function from other scripts
+		setMaterial(potionArray[potionNumber].potionMaterial);
+	}
+
+
 }
 
