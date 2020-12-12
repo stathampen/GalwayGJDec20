@@ -1,6 +1,9 @@
 using UnityEngine;
-
-public class Potion : MonoBehaviour
+using System.Collections;
+ 
+[System.Serializable]
+public class Potion 
 {
-	public Rigidbody Body;
+	public string Name;
+	public Material potionMaterial;
 }
