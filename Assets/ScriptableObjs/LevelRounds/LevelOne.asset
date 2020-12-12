@@ -10,7 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25d484ab6bd2094458a4ea2fe14591d1, type: 3}
-  m_Name: LevelRound
+  m_Name: LevelOne
   m_EditorClassIdentifier: 
-  maxMissesCount: 0
-  typesWanted: []
+  maxMissesCount: -5
+  typesWanted:
+  - potionName: Red
+    potionCount: 0
+  - potionName: Blue
+    potionCount: 0

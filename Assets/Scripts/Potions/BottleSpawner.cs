@@ -15,9 +15,9 @@ public class BottleSpawner : MonoBehaviour
 		set;
 	}
 
-	private void Awake() {
+	private void Start() {
 		try {
-			levelController = GameObject.Find("levelController").GetComponent<LevelController>();
+			levelController = GameObject.Find("The God Monobehaviour").GetComponent<LevelController>();
 		}
 		catch
 		{
@@ -38,12 +38,14 @@ public class BottleSpawner : MonoBehaviour
 				if(levelController)
 				{
 					bottle.GetComponent<Bottle>().Init(levelController);
-					_timer = 0.0f;
 				}
 				else
 				{
 					Debug.Log("MISSING LEVEL CONTROLLER");
 				}
+
+				_timer = 0.0f;
+
 			}
 		}
 	}
