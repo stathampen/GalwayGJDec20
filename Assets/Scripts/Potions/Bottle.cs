@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Bottle : MonoBehaviour
 {
-	public Potion[] potions;
+	public Potion [] potions;
 
 	public GameObject bottleModel;
 
@@ -28,7 +28,6 @@ public class Bottle : MonoBehaviour
 	public void Init(BottleFailureCounter failureCounter)
 	{
 		_bottleFailureCounter = failureCounter;
-		SetPotion(0);
 	}
 
 	public void SetPotion(int potionNumber)
@@ -38,11 +37,16 @@ public class Bottle : MonoBehaviour
 		Potion = potions[potionNumber];
 	}
 
+	public string GetPotion()
+	{
+		return Potion.potionName;
+	}
 
 	private void Start() {
 		if(potions.Length > 0)
 		{
 			SetMaterial(potions[0].potionMaterial);
+			Potion = potions[0];
 		}
 	}
 
