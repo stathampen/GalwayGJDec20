@@ -8,42 +8,22 @@ public class BottleSuccessCounter : MonoBehaviour
 	[SerializeField] private int numberToBeat;
 	[SerializeField] private LevelController levelController;
 	[SerializeField] private BottleFailureCounter bottleFailureCounter;
-	[SerializeField] private Potion[] typesWanted;
+	[SerializeField] private Potion typesWanted;
 
 	private int _currentCount;
 	private void OnCollisionEnter(Collision other)
 	{
-		var potion = other.collider.GetComponent<PotionBehaviour>();
-
-		if (potion)
+		var bottle = other.collider.GetComponent<Bottle>();
+		if (bottle.Potion.name != typesWanted.name)
 		{
-			var bottle = potion.GetComponent<Bottle>();
-			if (bottle.potions.Length != typesWanted.Length)
-			{
-				bottleFailureCounter.AddFailure(bottle);
-			}
-			else
-			{
-				var correctTypes = 0;
-				for (var i = 0; i < typesWanted.Length; i++)
-				{
-					if (typesWanted[i].name == bottle.potions[i].name)
-					{
-						correctTypes++;
-					}
-				}
-
-				if (correctTypes == typesWanted.Length)
-				{
-					_currentCount++;
-				}
-				else
-				{
-					bottleFailureCounter.AddFailure(bottle);
-				}
-			}
-			Destroy(potion.gameObject);
+			bottleFailureCounter.AddFailure(bottle);
 		}
+		else
+		{
+			_currentCount++;
+		}
+
+		Destroy(bottle.gameObject);
 
 		if (_currentCount == numberToBeat)
 		{
