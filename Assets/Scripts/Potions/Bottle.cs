@@ -11,6 +11,8 @@ public class Bottle : MonoBehaviour
 
 	public Rigidbody body;
 
+	[SerializeField] private GameObject explosionPrefab;
+
 	private BottleFailureCounter _bottleFailureCounter;
 
 	private Transform _transformToFollow;
@@ -24,6 +26,7 @@ public class Bottle : MonoBehaviour
 	public void Grab(Transform transformToFollow)
 	{
 		body.position = transformToFollow.position;
+		body.rotation = Quaternion.identity;
 		body.isKinematic = true;
 		body.useGravity = false;
 		body.velocity = Vector3.zero;
@@ -42,6 +45,7 @@ public class Bottle : MonoBehaviour
 		body.mass = 1;
 		body.detectCollisions = true;
 		body.WakeUp();
+		body.rotation = Quaternion.identity;
 		body.position = dropPosition;
 	}
 
@@ -60,6 +64,21 @@ public class Bottle : MonoBehaviour
 	public string GetPotion()
 	{
 		return Potion.potionName;
+	}
+
+	public void BreakBottle(bool dropped)
+	{
+		if (dropped)
+		{
+
+		}
+		else
+		{
+			var explosion = Instantiate(explosionPrefab, transform.position, transform.rotation).GetComponent<Explosion>();
+			explosion.Explode();
+		}
+		_bottleFailureCounter.AddFailure(this);
+		gameObject.SetActive(false);
 	}
 
 	private void Start() {
@@ -89,13 +108,13 @@ public class Bottle : MonoBehaviour
 
 	private void OnCollisionEnter(Collision other)
 	{
-		/*// perhaps this should check if it hits the floor instead
-		var floor = other.gameObject.GetComponent<Floor>();
-		if (floor)
+		// perhaps this should check if it hits the floor instead
+		var tag = other.gameObject.tag;
+		if (tag == "Floor")
 		{
 			_bottleFailureCounter.AddFailure(this);
-			Destroy(gameObject);
-		}*/
+			BreakBottle(gameObject);
+		}
 	}
 }
 

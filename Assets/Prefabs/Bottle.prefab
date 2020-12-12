@@ -139,6 +139,7 @@ MonoBehaviour:
   bottleModel: {fileID: 8195131146078874293}
   currentMaterial: {fileID: 0}
   body: {fileID: 1863911393}
+  explosionPrefab: {fileID: 3824368321581207604, guid: 958201e42da5e7a499383a1d03ad1420, type: 3}
 --- !u!54 &1863911393
 Rigidbody:
   m_ObjectHideFlags: 0
