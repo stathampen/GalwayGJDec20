@@ -9,8 +9,6 @@ public class PotionBehaviour : MonoBehaviour
 	[Header("Potion Settings")]
     public Material [] potionMaterials;
 
-    public enum PotionMaterial {PotionMaterials};
-    public PotionMaterial potionType;
     //want to change the material
 
 

@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Bottle : MonoBehaviour
 {
-	public Potion [] potionArray;
+	public Potion [] potions;
 
 	public GameObject bottleModel;
 
@@ -11,24 +11,30 @@ public class Bottle : MonoBehaviour
 
 	public Rigidbody body;
 
+	private BottleFailureCounter _bottleFailureCounter;
+
 	public void GrabBottle()
 	{
 		// todo something
 		Debug.Log("We have grabbed the bottle");
 	}
 
+	public void Init(BottleFailureCounter failureCounter)
+	{
+		_bottleFailureCounter = failureCounter;
+	}
 
 	public void SetPotion(int potionNumber)
 	{
 		//call this function from other scripts
-		SetMaterial(potionArray[potionNumber].potionMaterial);
+		SetMaterial(potions[potionNumber].potionMaterial);
 	}
 
 
 	private void Start() {
-		if(potionArray.Length > 0)
+		if(potions.Length > 0)
 		{
-			SetMaterial(potionArray[0].potionMaterial);
+			SetMaterial(potions[0].potionMaterial);
 		}
 	}
 
@@ -53,9 +59,9 @@ public class Bottle : MonoBehaviour
 		var floor = other.gameObject.GetComponent<Floor>();
 		if (floor)
 		{
-			/*Destroy(gameObject);\#1#
+			_bottleFailureCounter.AddFailure(this);
+			Destroy(gameObject);
 		}*/
 	}
-
 }
 
