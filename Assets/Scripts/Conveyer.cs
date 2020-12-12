@@ -40,6 +40,7 @@ public class Conveyer : MonoBehaviour
 		if (component && bottle)
 		{
 			_bodiesToPush.Remove(component);
+			Debug.Log("no longer pushing: " + other);
 		}
 	}
 }

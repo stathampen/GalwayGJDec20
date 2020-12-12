@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Bottle : MonoBehaviour
@@ -12,18 +11,24 @@ public class Bottle : MonoBehaviour
 
 	public Rigidbody body;
 
+	public void GrabBottle()
+	{
+		// todo something
+		Debug.Log("We have grabbed the bottle");
+	}
 
-	public void setPotion(int potionNumber)
+
+	public void SetPotion(int potionNumber)
 	{
 		//call this function from other scripts
-		setMaterial(potionArray[potionNumber].potionMaterial);
+		SetMaterial(potionArray[potionNumber].potionMaterial);
 	}
 
 
 	private void Start() {
 		if(potionArray.Length > 0)
-		{	
-			setMaterial(potionArray[0].potionMaterial);
+		{
+			SetMaterial(potionArray[0].potionMaterial);
 		}
 	}
 
@@ -31,23 +36,25 @@ public class Bottle : MonoBehaviour
 
 	}
 
-	private void setMaterial(Material newMaterial)
+	private void SetMaterial(Material newMaterial)
 	{
-		MeshRenderer meshRenderer = bottleModel.GetComponent<MeshRenderer>();
+		var meshRenderer = bottleModel.GetComponent<MeshRenderer>();
         // Get the current material applied on the GameObject
-        Material oldMaterial = meshRenderer.material;
+        // todo do something with this?
+        var oldMaterial = meshRenderer.material;
         // Set the new material on the GameObject
         meshRenderer.material = newMaterial;
+        currentMaterial = meshRenderer.material;
 	}
 
 	private void OnCollisionEnter(Collision other)
 	{
-		var conveyer = other.gameObject.GetComponent<Conveyer>();
-		// todo also check if colliding with player
-		if (!conveyer)
+		/*// perhaps this should check if it hits the floor instead
+		var floor = other.gameObject.GetComponent<Floor>();
+		if (floor)
 		{
-			Destroy(this);
-		}
+			/*Destroy(gameObject);\#1#
+		}*/
 	}
 
 }

@@ -9,21 +9,21 @@ public class PotionBehaviour : MonoBehaviour
 	[Header("Potion Settings")]
     public Material [] potionMaterials;
 
-    public enum potionMaterial {potionMaterials};
-    public potionMaterial potionType;
+    public enum PotionMaterial {PotionMaterials};
+    public PotionMaterial potionType;
     //want to change the material
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
 
