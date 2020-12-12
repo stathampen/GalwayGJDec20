@@ -133,6 +133,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6a29a211626af5a46be8044ab19580d0, type: 2}
   - {fileID: 11400000, guid: 52cb3c8cbd1c937419ba92bf9c097920, type: 2}
   - {fileID: 11400000, guid: fb55fed6fd556f64ba70dd7df87d1dd5, type: 2}
+  - {fileID: 11400000, guid: d112ecdf02355c94ca7ceb738276defb, type: 2}
+  - {fileID: 11400000, guid: 0ec01889c6611aa49babf111c0c86dfa, type: 2}
+  - {fileID: 11400000, guid: 88d3523d5a50677419147823d1381d68, type: 2}
   bottleModel: {fileID: 8195131146078874293}
   currentMaterial: {fileID: 0}
   body: {fileID: 1863911393}
