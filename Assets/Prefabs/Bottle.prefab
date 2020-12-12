@@ -162,7 +162,7 @@ MonoBehaviour:
   potions: []
   bottleModel: {fileID: 30818581597857705}
   currentMaterial: {fileID: 0}
-  body: {fileID: 0}
+  body: {fileID: 1863911393}
 --- !u!54 &1863911393
 Rigidbody:
   m_ObjectHideFlags: 0
