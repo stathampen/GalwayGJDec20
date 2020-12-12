@@ -30,6 +30,12 @@ public class Bottle : MonoBehaviour
 		SetMaterial(potions[potionNumber].potionMaterial);
 	}
 
+	public void GetPotion(int potionNumber)
+	{
+		//call this function from other scripts
+		SetMaterial(potions[potionNumber].potionMaterial);
+	}
+
 
 	private void Start() {
 		if(potions.Length > 0)
