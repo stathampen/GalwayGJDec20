@@ -12,6 +12,9 @@ public class Bottle : MonoBehaviour
 	public Rigidbody body;
 
 	private LevelController levelController;
+	[SerializeField] private GameObject explosionPrefab;
+
+	private Transform _transformToFollow;
 
 	public Potion Potion
 	{
@@ -19,10 +22,30 @@ public class Bottle : MonoBehaviour
 		private set;
 	}
 
-	public void GrabBottle()
+	public void Grab(Transform transformToFollow)
 	{
-		// todo something
-		Debug.Log("We have grabbed the bottle");
+		body.position = transformToFollow.position;
+		body.rotation = Quaternion.identity;
+		body.isKinematic = true;
+		body.useGravity = false;
+		body.velocity = Vector3.zero;
+		_transformToFollow = transformToFollow;
+		body.mass = 0;
+		body.detectCollisions = false;
+		body.Sleep();
+	}
+
+	public void Drop(Vector3 dropPosition)
+	{
+		body.isKinematic = false;
+		body.useGravity = true;
+		Debug.Log("We have dropped the bottle");
+		_transformToFollow = null;
+		body.mass = 1;
+		body.detectCollisions = true;
+		body.WakeUp();
+		body.rotation = Quaternion.identity;
+		body.position = dropPosition;
 	}
 
 	public void Init(LevelController levelController)
@@ -42,6 +65,17 @@ public class Bottle : MonoBehaviour
 		return Potion.potionName;
 	}
 
+	public void BreakBottle(bool dropped)
+	{
+		//if the user has dropped the bottle of mixed the wrong potion it should explode
+		var explosion = Instantiate(explosionPrefab, transform.position, transform.rotation).GetComponent<Explosion>();
+		explosion.Explode();
+
+		levelController.failedPotion();
+
+		gameObject.SetActive(false);
+	}
+
 	private void Start() {
 		if(potions.Length > 0)
 		{
@@ -54,22 +88,27 @@ public class Bottle : MonoBehaviour
 	{
 		var meshRenderer = bottleModel.GetComponent<MeshRenderer>();
         // Get the current material applied on the GameObject
-        // todo do something with this?
-        var oldMaterial = meshRenderer.material;
         // Set the new material on the GameObject
         meshRenderer.material = newMaterial;
         currentMaterial = meshRenderer.material;
 	}
 
+	private void Update()
+	{
+		if (_transformToFollow && body.isKinematic)
+		{
+			transform.position = _transformToFollow.position;
+		}
+	}
+
 	private void OnCollisionEnter(Collision other)
 	{
-		/*// perhaps this should check if it hits the floor instead
-		var floor = other.gameObject.GetComponent<Floor>();
-		if (floor)
+		// perhaps this should check if it hits the floor instead
+		var tag = other.gameObject.tag;
+		if (tag == "Floor")
 		{
-			_bottleFailureCounter.AddFailure(this);
-			Destroy(gameObject);
-		}*/
+			BreakBottle(gameObject);
+		}
 	}
 }
 

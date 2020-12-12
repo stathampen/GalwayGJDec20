@@ -58,6 +58,17 @@ public class LevelController : MonoBehaviour
 		}
 	}
 
+	//either wrong or broken potion
+	public void failedPotion()
+	{
+		levelRounds[currentRound].maxMissesCount--;
+
+		if(levelRounds[currentRound].maxMissesCount <= 0)
+		{
+			endGame();
+		}
+	}
+
 
 	// move to the next level
 	private void advanceLevel()
@@ -73,16 +84,6 @@ public class LevelController : MonoBehaviour
 		{
 			//need to do a better way than killing the programme
 			Application.Quit();
-		}
-	}
-
-	private void failedPotion()
-	{
-		levelRounds[currentRound].maxMissesCount--;
-
-		if(levelRounds[currentRound].maxMissesCount <= 0)
-		{
-			endGame();
 		}
 	}
 
