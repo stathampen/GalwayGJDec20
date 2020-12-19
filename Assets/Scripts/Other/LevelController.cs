@@ -1,46 +1,73 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
-	[SerializeField] private BottleSpawner bottleSpawner;
 	[SerializeField] private LevelRound [] levelRounds;
 	private GameObject _currentLevel;
 
-	private int currentRound = 0;
+	private readonly List<BottleSpawner> _bottleSpawners = new List<BottleSpawner>();
+
+	private int _currentRound;
+
+	private int _currentFailsAllowed = 5;
 
 	public void OnEnable()
 	{
-		bottleSpawner.CanSpawnBottles = true;
+		foreach (var spawner in _bottleSpawners)
+		{
+			spawner.CanSpawnBottles = true;
+		}
 	}
 
 	public void OnDisable()
 	{
-		bottleSpawner.CanSpawnBottles = false;
+		foreach (var spawner in _bottleSpawners)
+		{
+			spawner.CanSpawnBottles = false;
+		}
 	}
 
 	public void LoadLevel()
 	{
 		if (_currentLevel)
 		{
+			foreach (var spawner in _bottleSpawners)
+			{
+				spawner.CanSpawnBottles = false;
+			}
+			_bottleSpawners.Clear();
 			_currentLevel.SetActive(false);
 		}
-		_currentLevel = Instantiate(levelRounds[currentRound].prefab);
+		_currentLevel = Instantiate(levelRounds[_currentRound].prefab);
+		_currentFailsAllowed = levelRounds[_currentRound].maxMissesCount;
+		var spawnerObjects = GameObject.FindGameObjectsWithTag("BottleSpawner");
+
+		Debug.Log("Found spawners: " + spawnerObjects.Length);
+
+		foreach (var spawnerObject in spawnerObjects)
+		{
+			var spawner = spawnerObject.GetComponent<BottleSpawner>();
+			spawner.CanSpawnBottles = true;
+			_bottleSpawners.Add(spawner);
+		}
 	}
 
-	//check the user has pased the right potion
+	//check the user has passed the right potion
 	public void CheckPotion(string potionName)
 	{
 		//first check if the potion is one we want
-		for (var i = 0; i < levelRounds[currentRound].typesWanted.Length; i++)
+		for (var i = 0; i < levelRounds[_currentRound].typesWanted.Length; i++)
 		{
 			//the user has passed a correct potion
-			if (potionName == levelRounds[currentRound].typesWanted[i].potionName)
+			if (potionName == levelRounds[_currentRound].typesWanted[i].potionName)
 			{
 				//AND still want more of those potions
-				if(levelRounds[currentRound].typesWanted[i].potionCount > 0)
+				if(levelRounds[_currentRound].typesWanted[i].potionCount > 0)
 				{
-					levelRounds[currentRound].typesWanted[i].potionCount--;
+					levelRounds[_currentRound].typesWanted[i].potionCount--;
 				}
 				else
 				{
@@ -58,9 +85,9 @@ public class LevelController : MonoBehaviour
 	//either wrong or broken potion
 	public void FailedPotion()
 	{
-		levelRounds[currentRound].maxMissesCount--;
+		_currentFailsAllowed--;
 
-		if(levelRounds[currentRound].maxMissesCount <= 0)
+		if(_currentFailsAllowed <= 0)
 		{
 			EndGame();
 		}
@@ -73,33 +100,39 @@ public class LevelController : MonoBehaviour
 
 	public int GetRemainingPotions(int i)
 	{
-		return levelRounds[currentRound].typesWanted[i].potionCount;
+		return levelRounds[_currentRound].typesWanted[i].potionCount;
 	}
 
 	public int GetListPotions()
 	{
-		return levelRounds[currentRound].typesWanted.Length;
+		return levelRounds[_currentRound].typesWanted.Length;
 	}
 
 	// move to the next level
 	private void AdvanceLevel()
 	{
 		//as long as the current round is less that the max number of rounds the game can continue
-		if(currentRound < levelRounds.Length)
+		if(_currentRound < levelRounds.Length - 1)
 		{
-			currentRound++; //to the next round
+			_currentRound++; //to the next round
 			LoadLevel();
 		}
 		else
 		{
-			//need to do a better way than killing the programme
-			Application.Quit();
+			foreach (var spawner in _bottleSpawners)
+			{
+				spawner.CanSpawnBottles = false;
+			}
+			_bottleSpawners.Clear();
 		}
 	}
 
 	private void EndGame()
 	{
-		bottleSpawner.CanSpawnBottles = false;
+		foreach (var spawner in _bottleSpawners)
+		{
+			spawner.CanSpawnBottles = false;
+		}
 		Debug.Log("END GAME");
 	}
 }

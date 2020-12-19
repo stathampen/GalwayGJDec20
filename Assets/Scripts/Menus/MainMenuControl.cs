@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Menus
@@ -11,6 +10,9 @@ namespace Menus
 		[SerializeField] private GameObject instructionsButton;
 		[SerializeField] private float transitionTime;
 		[SerializeField] private LevelController levelController;
+		[SerializeField] private GameObject mainMenuFab;
+		[SerializeField] private GameObject buttonsPanel;
+		[SerializeField] private GameObject titlePanel;
 
 		private Image _panelImage;
 		private TextMeshProUGUI _panelText;
@@ -65,6 +67,10 @@ namespace Menus
 
 		public void LoadFirstLevel()
 		{
+			instructionsPanel.SetActive(false);
+			mainMenuFab.SetActive(false);
+			buttonsPanel.SetActive(false);
+			titlePanel.SetActive(false);
 			levelController.LoadLevel();
 		}
 

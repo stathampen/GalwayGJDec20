@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ExitChute : MonoBehaviour
 {
-
-    private LevelController levelController;
+	private LevelController levelController;
 
     private void Start() {
         try {
@@ -20,15 +19,15 @@ public class ExitChute : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if(levelController)
         {
-            if(other.gameObject.tag == "PotionBottle")
+            var bottle = other.GetComponent<Bottle>();
+
+            if (bottle)
             {
-                var bottle = other.GetComponent<Bottle>();
+	            //pass on up to the level controller to decide if the potion is the correct one
+	            levelController.CheckPotion(bottle.Potion.name);
 
-                //pass on up to the level controller to decide if the potion is the correct one
-                levelController.CheckPotion(bottle.Potion.name);
-
-                //unload the bottle as it's no longer needed
-                Destroy(bottle);
+	            //unload the bottle as it's no longer needed
+	            Destroy(bottle.gameObject);
             }
         }
     }

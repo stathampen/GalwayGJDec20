@@ -44,7 +44,7 @@ public class PotionFiller : MonoBehaviour
 						break;
 
 					default:
-						bottle.BreakBottle(false);
+						bottle.BreakBottle();
 						break;
 				}
 			}

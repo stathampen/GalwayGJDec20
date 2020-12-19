@@ -6,6 +6,8 @@ TagManager:
   tags:
   - PotionBottle
   - Floor
+  - LevelController
+  - BottleSpawner
   layers:
   - Default
   - TransparentFX
