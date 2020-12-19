@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
                     var col = colliders[i];
 
                     var conveyer = col.GetComponent<Conveyer>();
-                    if (conveyer)
+                    if (conveyer && conveyer.CanPutBottleOn)
                     {
                         if (!convenyerCollider)
                         {

@@ -7,6 +7,8 @@ public class Conveyer : MonoBehaviour
 	private Vector3 _direction;
 	private readonly List<Rigidbody> _bodiesToPush = new List<Rigidbody>(16);
 
+	public bool CanPutBottleOn;
+
 	public void RemoveRigidbody(Bottle bottleToRemove)
 	{
 		var index = _bodiesToPush.FindIndex(rigidBody => rigidBody.GetInstanceID() ==

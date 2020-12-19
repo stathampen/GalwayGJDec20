@@ -1785,6 +1785,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: The God Monobehaviour
       objectReference: {fileID: 0}
+    - target: {fileID: 2683946034871337327, guid: 4ce038afc70d33e41ab0ddfb5c3cf7c2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683946034871337327, guid: 4ce038afc70d33e41ab0ddfb5c3cf7c2, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683946034871337327, guid: 4ce038afc70d33e41ab0ddfb5c3cf7c2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683946034871337327, guid: 4ce038afc70d33e41ab0ddfb5c3cf7c2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746956848207481431, guid: 4ce038afc70d33e41ab0ddfb5c3cf7c2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746956848207481431, guid: 4ce038afc70d33e41ab0ddfb5c3cf7c2, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746956848207481431, guid: 4ce038afc70d33e41ab0ddfb5c3cf7c2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746956848207481431, guid: 4ce038afc70d33e41ab0ddfb5c3cf7c2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ce038afc70d33e41ab0ddfb5c3cf7c2, type: 3}
 --- !u!1001 &1481870829
