@@ -80,8 +80,6 @@ public class LevelController : MonoBehaviour
 	// move to the next level
 	private void AdvanceLevel()
 	{
-		Debug.Log("current round: " + currentRound);
-
 		//as long as the current round is less that the max number of rounds the game can continue
 		if(currentRound < levelRounds.Length)
 		{

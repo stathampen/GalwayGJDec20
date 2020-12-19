@@ -15,4 +15,10 @@ public class PotionPanelController : MonoBehaviour
         countText.text = pointCount.ToString();
     }
 
+    public void setDisplayBottle()
+    {
+        Debug.Log("hitting this");
+        displayBottle.SetPotion(3);
+    }
+
 }

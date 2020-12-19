@@ -25,7 +25,7 @@ public class UIController : MonoBehaviour
         for(int i = 0; i < potionNo; i++)
         {
             GameObject Panel = Instantiate(potionPanelPrefab, 
-            new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z),
+            new Vector3(potionPanelPos.transform.position.x, potionPanelPos.transform.position.y + (3 * i), potionPanelPos.transform.position.z),
             gameObject.transform.rotation,
             gameObject.transform);
 
@@ -37,6 +37,9 @@ public class UIController : MonoBehaviour
             panelArray[i].GetComponent<PotionPanelController>().setDisplayText(
                 levelController.GetRemainingPotions(i)
             );
+
+            // panelArray[i].GetComponent<PotionPanelController>().setDisplayBottle(
+            // );
         }
     }
     
