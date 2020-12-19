@@ -14,6 +14,10 @@ public class LevelController : MonoBehaviour
 
 	private int _currentFailsAllowed = 5;
 
+	private int[] _currentSuccessesAllowed = new int[10];
+
+	private bool[] _successTable = new bool[10];
+
 	public void OnEnable()
 	{
 		foreach (var spawner in _bottleSpawners)
@@ -43,6 +47,17 @@ public class LevelController : MonoBehaviour
 		}
 		_currentLevel = Instantiate(levelRounds[_currentRound].prefab);
 		_currentFailsAllowed = levelRounds[_currentRound].maxMissesCount;
+		for (var i = 0; i < levelRounds[_currentRound].typesWanted.Length; i++)
+		{
+			_currentSuccessesAllowed[i] = levelRounds[_currentRound].typesWanted[i].potionCount;
+		}
+		_successTable = new bool[levelRounds[_currentRound].typesWanted.Length];
+
+		for (var i = 0; i < _successTable.Length; i++)
+		{
+			_successTable[i] = false;
+		}
+
 		var spawnerObjects = GameObject.FindGameObjectsWithTag("BottleSpawner");
 
 		Debug.Log("Found spawners: " + spawnerObjects.Length);
@@ -58,21 +73,20 @@ public class LevelController : MonoBehaviour
 	//check the user has passed the right potion
 	public void CheckPotion(string potionName)
 	{
-		//first check if the potion is one we want
 		for (var i = 0; i < levelRounds[_currentRound].typesWanted.Length; i++)
 		{
 			//the user has passed a correct potion
 			if (potionName == levelRounds[_currentRound].typesWanted[i].potionName)
 			{
 				//AND still want more of those potions
-				if(levelRounds[_currentRound].typesWanted[i].potionCount > 0)
+				if(_currentSuccessesAllowed[i] > 0)
 				{
-					levelRounds[_currentRound].typesWanted[i].potionCount--;
+					_currentSuccessesAllowed[i]--;
 				}
 				else
 				{
 					// advance the level routine
-					AdvanceLevel();
+					_successTable[i] = true;
 				}
 			}
 			else
@@ -80,6 +94,16 @@ public class LevelController : MonoBehaviour
 				FailedPotion();
 			}
 		}
+
+		foreach (var success in _successTable)
+		{
+			if (!success)
+			{
+				return;
+			}
+		}
+
+		AdvanceLevel();
 	}
 
 	//either wrong or broken potion
