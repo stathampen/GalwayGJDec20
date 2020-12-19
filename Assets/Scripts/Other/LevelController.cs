@@ -93,9 +93,13 @@ public class LevelController : MonoBehaviour
 		}
 	}
 
+	public string GetPotionName(int i)
+	{
+		return levelRounds[currentRound].typesWanted[i].potionName;		
+	}
+
 	public int GetRemainingPotions(int i)
 	{
-		Debug.Log(levelRounds[_currentRound].typesWanted[i].potionCount);
 		return levelRounds[_currentRound].typesWanted[i].potionCount;
 	}
 
@@ -107,8 +111,6 @@ public class LevelController : MonoBehaviour
 	// move to the next level
 	private void AdvanceLevel()
 	{
-		Debug.Log("current round: " + _currentRound);
-
 		//as long as the current round is less that the max number of rounds the game can continue
 		if(_currentRound < levelRounds.Length - 1)
 		{
@@ -131,8 +133,6 @@ public class LevelController : MonoBehaviour
 		{
 			spawner.CanSpawnBottles = false;
 		}
-
 		Debug.Log("END GAME");
 	}
 }
-
