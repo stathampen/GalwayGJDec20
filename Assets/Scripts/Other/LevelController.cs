@@ -5,6 +5,7 @@ public class LevelController : MonoBehaviour
 {
 	[SerializeField] private BottleSpawner bottleSpawner;
 	[SerializeField] private LevelRound [] levelRounds;
+	private GameObject _currentLevel;
 
 	private int currentRound = 0;
 
@@ -18,21 +19,17 @@ public class LevelController : MonoBehaviour
 		bottleSpawner.CanSpawnBottles = false;
 	}
 
-	public void EndLevel(bool isSuccess)
+	public void LoadLevel()
 	{
-		bottleSpawner.CanSpawnBottles = false;
-		if (isSuccess)
+		if (_currentLevel)
 		{
-			// good stuff
+			_currentLevel.SetActive(false);
 		}
-		else
-		{
-			// bad stuff
-		}
+		_currentLevel = Instantiate(levelRounds[currentRound].prefab);
 	}
 
 	//check the user has pased the right potion
-	public void checkPotion(string potionName)
+	public void CheckPotion(string potionName)
 	{
 		//first check if the potion is one we want
 		for (var i = 0; i < levelRounds[currentRound].typesWanted.Length; i++)
@@ -47,31 +44,30 @@ public class LevelController : MonoBehaviour
 				}
 				else
 				{
-					//DONT WANT MORE OF THEM
-					failedPotion();
+					// advance the level routine
+					AdvanceLevel();
 				}
 			}
 			else
 			{
-				failedPotion();
+				FailedPotion();
 			}
 		}
 	}
 
 	//either wrong or broken potion
-	public void failedPotion()
+	public void FailedPotion()
 	{
 		levelRounds[currentRound].maxMissesCount--;
 
 		if(levelRounds[currentRound].maxMissesCount <= 0)
 		{
-			endGame();
+			EndGame();
 		}
 	}
 
-
 	// move to the next level
-	private void advanceLevel()
+	private void AdvanceLevel()
 	{
 		Debug.Log("current round: " + currentRound);
 
@@ -79,6 +75,7 @@ public class LevelController : MonoBehaviour
 		if(currentRound < levelRounds.Length)
 		{
 			currentRound++; //to the next round
+			LoadLevel();
 		}
 		else
 		{
@@ -87,8 +84,10 @@ public class LevelController : MonoBehaviour
 		}
 	}
 
-	private void endGame()
+	private void EndGame()
 	{
+		bottleSpawner.CanSpawnBottles = false;
+
 		Debug.Log("END GAME");
 	}
 }
