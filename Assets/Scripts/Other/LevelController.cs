@@ -12,6 +12,8 @@ public class LevelController : MonoBehaviour
 
 	private int _currentRound;
 
+	private int _currentFailsAllowed = 5;
+
 	public void OnEnable()
 	{
 		foreach (var spawner in _bottleSpawners)
@@ -40,6 +42,7 @@ public class LevelController : MonoBehaviour
 			_currentLevel.SetActive(false);
 		}
 		_currentLevel = Instantiate(levelRounds[_currentRound].prefab);
+		_currentFailsAllowed = levelRounds[_currentRound].maxMissesCount;
 		var spawnerObjects = GameObject.FindGameObjectsWithTag("BottleSpawner");
 
 		Debug.Log("Found spawners: " + spawnerObjects.Length);
@@ -82,9 +85,9 @@ public class LevelController : MonoBehaviour
 	//either wrong or broken potion
 	public void FailedPotion()
 	{
-		levelRounds[_currentRound].maxMissesCount--;
+		_currentFailsAllowed--;
 
-		if(levelRounds[_currentRound].maxMissesCount <= 0)
+		if(_currentFailsAllowed <= 0)
 		{
 			EndGame();
 		}
@@ -92,13 +95,13 @@ public class LevelController : MonoBehaviour
 
 	public int GetRemainingPotions(int i)
 	{
-		Debug.Log(levelRounds[currentRound].typesWanted[i].potionCount);
-		return levelRounds[currentRound].typesWanted[i].potionCount;
+		Debug.Log(levelRounds[_currentRound].typesWanted[i].potionCount);
+		return levelRounds[_currentRound].typesWanted[i].potionCount;
 	}
 
 	public int GetListPotions()
 	{
-		return levelRounds[currentRound].typesWanted.Length;
+		return levelRounds[_currentRound].typesWanted.Length;
 	}
 
 	// move to the next level
@@ -107,15 +110,18 @@ public class LevelController : MonoBehaviour
 		Debug.Log("current round: " + _currentRound);
 
 		//as long as the current round is less that the max number of rounds the game can continue
-		if(_currentRound < levelRounds.Length)
+		if(_currentRound < levelRounds.Length - 1)
 		{
 			_currentRound++; //to the next round
 			LoadLevel();
 		}
 		else
 		{
-			//need to do a better way than killing the programme
-			Application.Quit();
+			foreach (var spawner in _bottleSpawners)
+			{
+				spawner.CanSpawnBottles = false;
+			}
+			_bottleSpawners.Clear();
 		}
 	}
 
