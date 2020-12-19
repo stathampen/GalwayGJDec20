@@ -95,7 +95,7 @@ public class LevelController : MonoBehaviour
 
 	public string GetPotionName(int i)
 	{
-		return levelRounds[currentRound].typesWanted[i].potionName;		
+		return levelRounds[_currentRound].typesWanted[i].potionName;		
 	}
 
 	public int GetRemainingPotions(int i)
