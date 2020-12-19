@@ -20,7 +20,7 @@ public class ExitChute : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if(levelController)
         {
-            if(other.gameObject.tag == "PotionBottle")
+            if(other.gameObject.CompareTag("PotionBottle"))
             {
                 var bottle = other.GetComponent<Bottle>();
 

@@ -42,9 +42,12 @@ public class LevelController : MonoBehaviour
 		_currentLevel = Instantiate(levelRounds[_currentRound].prefab);
 		var spawnerObjects = GameObject.FindGameObjectsWithTag("BottleSpawner");
 
+		Debug.Log("Found spawners: " + spawnerObjects.Length);
+
 		foreach (var spawnerObject in spawnerObjects)
 		{
 			var spawner = spawnerObject.GetComponent<BottleSpawner>();
+			spawner.CanSpawnBottles = true;
 			_bottleSpawners.Add(spawner);
 		}
 	}
