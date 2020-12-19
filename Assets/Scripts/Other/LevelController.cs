@@ -90,6 +90,17 @@ public class LevelController : MonoBehaviour
 		}
 	}
 
+	public int GetRemainingPotions(int i)
+	{
+		Debug.Log(levelRounds[currentRound].typesWanted[i].potionCount);
+		return levelRounds[currentRound].typesWanted[i].potionCount;
+	}
+
+	public int GetListPotions()
+	{
+		return levelRounds[currentRound].typesWanted.Length;
+	}
+
 	// move to the next level
 	private void AdvanceLevel()
 	{
