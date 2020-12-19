@@ -11,7 +11,7 @@ public class Bottle : MonoBehaviour
 
 	public Rigidbody body;
 
-	private LevelController levelController;
+	private LevelController _levelController;
 	[SerializeField] private GameObject explosionPrefab;
 
 	private Transform _transformToFollow;
@@ -48,9 +48,9 @@ public class Bottle : MonoBehaviour
 		body.position = dropPosition;
 	}
 
-	public void Init(LevelController levelController)
+	public void Init()
 	{
-		this.levelController = levelController;
+		this._levelController = GameObject.FindWithTag("LevelController").GetComponent<LevelController>();
 	}
 
 	public void SetPotion(int potionNumber)
@@ -71,7 +71,7 @@ public class Bottle : MonoBehaviour
 		var explosion = Instantiate(explosionPrefab, transform.position, transform.rotation).GetComponent<Explosion>();
 		explosion.Explode();
 
-		levelController.FailedPotion();
+		_levelController.FailedPotion();
 
 		gameObject.SetActive(false);
 	}
