@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7491421723763846780}
   - component: {fileID: 5789724528650854873}
   - component: {fileID: 8628277317674292499}
+  - component: {fileID: 259875294}
   m_Layer: 0
   m_Name: EmptyShelf
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 7835472739567072454}
   m_LocalRotation: {x: 0, y: 0.7072302, z: 0.7069834, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.08, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.053333335, y: 0.26666668, z: 0.26666668}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -81,3 +82,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &259875294
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7835472739567072454}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.264986, y: 4.0000014, z: 5.9560223}
+  m_Center: {x: 1.6324927, y: 0.99999976, z: 1.9780107}
