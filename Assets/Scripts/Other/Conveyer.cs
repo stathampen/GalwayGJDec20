@@ -30,7 +30,7 @@ public class Conveyer : MonoBehaviour
 		foreach (var body in bodiesToPushCopy)
 		{
 			body.MovePosition(body.position + pushForce);
-			if (body.gameObject.activeSelf)
+			if (!body.gameObject.activeSelf)
 			{
 				_bodiesToPush.Remove(body);
 			}

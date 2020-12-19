@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxMissesCount: -5
   typesWanted:
-  - potionName: Red
-    potionCount: 0
-  - potionName: Blue
-    potionCount: 0
+  - potionName: Green
+    potionCount: 3
+  prefab: {fileID: 1191673368230038694, guid: 000ef1737e07a4c48bafff1dd6200388, type: 3}
