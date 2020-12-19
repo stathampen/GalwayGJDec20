@@ -65,15 +65,14 @@ public class Bottle : MonoBehaviour
 		return Potion.potionName;
 	}
 
-	public void BreakBottle(bool dropped)
+	public void BreakBottle()
 	{
 		//if the user has dropped the bottle of mixed the wrong potion it should explode
-		var explosion = Instantiate(explosionPrefab, transform.position, transform.rotation).GetComponent<Explosion>();
-		explosion.Explode();
+		Instantiate(explosionPrefab, transform.position, transform.rotation).GetComponent<Explosion>().Explode();
 
 		_levelController.FailedPotion();
 
-		gameObject.SetActive(false);
+		Destroy(gameObject);
 	}
 
 	private void Start() {
@@ -104,10 +103,11 @@ public class Bottle : MonoBehaviour
 	private void OnCollisionEnter(Collision other)
 	{
 		// perhaps this should check if it hits the floor instead
-		var tag = other.gameObject.tag;
-		if (tag == "Floor")
+		var otherTag = other.gameObject.tag;
+		if (otherTag == "Floor")
 		{
-			BreakBottle(gameObject);
+			Debug.Log("breaking on floor");
+			BreakBottle();
 		}
 	}
 }

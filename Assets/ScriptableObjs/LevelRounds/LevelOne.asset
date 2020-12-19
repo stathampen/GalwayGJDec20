@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25d484ab6bd2094458a4ea2fe14591d1, type: 3}
   m_Name: LevelOne
   m_EditorClassIdentifier:
-  maxMissesCount: -5
+  maxMissesCount: 3
   typesWanted:
   - potionName: Green
     potionCount: 3
