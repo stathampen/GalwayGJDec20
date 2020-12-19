@@ -11,14 +11,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25d484ab6bd2094458a4ea2fe14591d1, type: 3}
   m_Name: LevelOne
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   maxMissesCount: 3
   typesWanted:
   - potionName: Green
-    potionCount: 3
+    potionCount: 2
   prefab: {fileID: 1191673368230038694, guid: 000ef1737e07a4c48bafff1dd6200388, type: 3}
-  - potionName: Red
-    potionCount: 3
-  - potionName: Blue
-    potionCount: 4
-  prefab: {fileID: 0}
