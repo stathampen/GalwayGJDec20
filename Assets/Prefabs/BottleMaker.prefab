@@ -169,6 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedOfConveyer: 1
+  CanPutBottleOn: 0
 --- !u!65 &6004268974015073126
 BoxCollider:
   m_ObjectHideFlags: 0
