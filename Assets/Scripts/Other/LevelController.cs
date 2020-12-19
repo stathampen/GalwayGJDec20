@@ -66,9 +66,13 @@ public class LevelController : MonoBehaviour
 		}
 	}
 
+	public string GetPotionName(int i)
+	{
+		return levelRounds[currentRound].typesWanted[i].potionName;		
+	}
+
 	public int GetRemainingPotions(int i)
 	{
-		Debug.Log(levelRounds[currentRound].typesWanted[i].potionCount);
 		return levelRounds[currentRound].typesWanted[i].potionCount;
 	}
 
@@ -96,8 +100,6 @@ public class LevelController : MonoBehaviour
 	private void EndGame()
 	{
 		bottleSpawner.CanSpawnBottles = false;
-
 		Debug.Log("END GAME");
 	}
 }
-

@@ -7,18 +7,18 @@ using TMPro;
 public class PotionPanelController : MonoBehaviour
 {
     public TextMeshProUGUI countText;
+    public TextMeshProUGUI bottleText;
 
     public Bottle displayBottle;
 
-    public void setDisplayText(int pointCount)
+    public void setDisplayText(int _potionCount)
     {
-        countText.text = pointCount.ToString();
+        countText.text = _potionCount.ToString() + " X ";
     }
 
-    public void setDisplayBottle()
+    public void setDisplayBottleText(string _potionName)
     {
-        Debug.Log("hitting this");
-        displayBottle.SetPotion(3);
+        bottleText.text = _potionName;
     }
 
 }

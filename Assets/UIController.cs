@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +17,9 @@ public class UIController : MonoBehaviour
     private void Start() {
         MakePanels();
     }
+    private void Update() {
+        PopulateUI();
+    }
     
     public void MakePanels ()
     {
@@ -32,14 +35,21 @@ public class UIController : MonoBehaviour
             panelArray.Add(Panel);
         }
 
+        PopulateUI();
+    }
+
+    private void PopulateUI()
+    {
+        
         for (int i = 0; i < panelArray.Count; i++)
         {
             panelArray[i].GetComponent<PotionPanelController>().setDisplayText(
                 levelController.GetRemainingPotions(i)
             );
 
-            // panelArray[i].GetComponent<PotionPanelController>().setDisplayBottle(
-            // );
+            panelArray[i].GetComponent<PotionPanelController>().setDisplayBottleText(
+                levelController.GetPotionName(i)
+            );
         }
     }
     
