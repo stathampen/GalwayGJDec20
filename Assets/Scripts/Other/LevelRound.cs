@@ -7,6 +7,7 @@ public class LevelRound : ScriptableObject
 {
     public int maxMissesCount;
     public requestedType [] typesWanted;
+    public GameObject prefab;
 }
 
 [System.Serializable]

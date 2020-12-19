@@ -71,7 +71,7 @@ public class Bottle : MonoBehaviour
 		var explosion = Instantiate(explosionPrefab, transform.position, transform.rotation).GetComponent<Explosion>();
 		explosion.Explode();
 
-		levelController.failedPotion();
+		levelController.FailedPotion();
 
 		gameObject.SetActive(false);
 	}

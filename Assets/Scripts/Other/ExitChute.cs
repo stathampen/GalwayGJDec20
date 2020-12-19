@@ -25,7 +25,7 @@ public class ExitChute : MonoBehaviour
                 var bottle = other.GetComponent<Bottle>();
 
                 //pass on up to the level controller to decide if the potion is the correct one
-                levelController.checkPotion(bottle.Potion.name);
+                levelController.CheckPotion(bottle.Potion.name);
 
                 //unload the bottle as it's no longer needed
                 Destroy(bottle);
