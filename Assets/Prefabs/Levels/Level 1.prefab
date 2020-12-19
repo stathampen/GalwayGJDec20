@@ -661,6 +661,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 7237675679312013151, guid: 8eed101d69cf02944b53c8c86dd2cf2f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 43abd31c45b50604d9b22afe0366e492, type: 2}
     - target: {fileID: 8695118243147778632, guid: 8eed101d69cf02944b53c8c86dd2cf2f, type: 3}
       propertyPath: m_Name
       value: Potion Pourer
