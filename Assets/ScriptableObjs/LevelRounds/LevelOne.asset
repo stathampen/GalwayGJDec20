@@ -15,6 +15,7 @@ MonoBehaviour:
   maxMissesCount: -5
   typesWanted:
   - potionName: Red
-    potionCount: 0
+    potionCount: 3
   - potionName: Blue
-    potionCount: 0
+    potionCount: 4
+  prefab: {fileID: 0}
