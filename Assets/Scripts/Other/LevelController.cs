@@ -18,6 +18,11 @@ public class LevelController : MonoBehaviour
 
 	private bool[] _successTable = new bool[10];
 
+	public int[] CurrentSuccessesAllowed
+	{
+		get => _currentSuccessesAllowed;
+	}
+
 	public void OnEnable()
 	{
 		foreach (var spawner in _bottleSpawners)
@@ -73,25 +78,30 @@ public class LevelController : MonoBehaviour
 	//check the user has passed the right potion
 	public void CheckPotion(string potionName)
 	{
+		var breakLoop = false;
 		for (var i = 0; i < levelRounds[_currentRound].typesWanted.Length; i++)
 		{
 			//the user has passed a correct potion
-			if (potionName == levelRounds[_currentRound].typesWanted[i].potionName)
+			if (!breakLoop)
 			{
-				//AND still want more of those potions
-				if(_currentSuccessesAllowed[i] > 0)
+				if (potionName == levelRounds[_currentRound].typesWanted[i].potionName)
 				{
+					//AND still want more of those potions
 					_currentSuccessesAllowed[i]--;
+					if(_currentSuccessesAllowed[i] == 0)
+					{
+						// advance the level routine
+						_successTable[i] = true;
+					}
+					else
+					{
+						breakLoop = true;
+					}
 				}
 				else
 				{
-					// advance the level routine
-					_successTable[i] = true;
+					FailedPotion();
 				}
-			}
-			else
-			{
-				FailedPotion();
 			}
 		}
 
@@ -124,7 +134,7 @@ public class LevelController : MonoBehaviour
 
 	public int GetRemainingPotions(int i)
 	{
-		return levelRounds[_currentRound].typesWanted[i].potionCount;
+		return _currentSuccessesAllowed[i];
 	}
 
 	public int GetListPotions()
