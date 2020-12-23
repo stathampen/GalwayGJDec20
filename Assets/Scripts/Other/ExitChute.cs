@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ExitChute : MonoBehaviour
 {
+    public AudioSource audioSource;
 	private LevelController levelController;
 
     private void Start() {
@@ -25,6 +26,8 @@ public class ExitChute : MonoBehaviour
             {
 	            //pass on up to the level controller to decide if the potion is the correct one
 	            levelController.CheckPotion(bottle.Potion.name);
+
+                audioSource.Play();
 
 	            //unload the bottle as it's no longer needed
 	            Destroy(bottle.gameObject);

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
@@ -158,6 +159,7 @@ public class LevelController : MonoBehaviour
 				spawner.CanSpawnBottles = false;
 			}
 			_bottleSpawners.Clear();
+			SceneManager.LoadScene("FinalScene");
 		}
 	}
 
@@ -168,5 +170,6 @@ public class LevelController : MonoBehaviour
 			spawner.CanSpawnBottles = false;
 		}
 		Debug.Log("END GAME");
+		SceneManager.LoadScene("FinalScene");
 	}
 }

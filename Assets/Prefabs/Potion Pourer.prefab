@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6288626506628423128
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4630593855675915095}
+  - component: {fileID: 1195661890898761840}
+  m_Layer: 0
+  m_Name: backcollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4630593855675915095
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6288626506628423128}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4287905008902809210}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1195661890898761840
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6288626506628423128}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.274342, y: 168.69127, z: 100.02803}
+  m_Center: {x: 55.488995, y: 96.587654, z: 1.4094691}
 --- !u!1 &6840749078729783530
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,6 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedOfConveyer: 1
+  CanPutBottleOn: 0
 --- !u!1 &8695118243147778632
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,6 +150,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.8, y: 1.16, z: 0.8}
   m_Center: {x: 0, y: 0.111225486, z: 0}
+--- !u!65 &148566173413127665
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9211806576412764044}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.35267517, y: 2.1304471, z: 3.532599}
+  m_Center: {x: -0.9298394, y: 0.005973727, z: -0.18904775}
 --- !u!1001 &2457055728930481444
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -112,10 +170,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 487752935536943011}
     m_Modifications:
-    - target: {fileID: 1012808539163865649, guid: 4ed6389e18d152b4ab8451575181dfd4, type: 3}
-      propertyPath: m_Size.z
-      value: 0.8
-      objectReference: {fileID: 0}
     - target: {fileID: 1012808539163865650, guid: 4ed6389e18d152b4ab8451575181dfd4, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -243,5 +297,10 @@ PrefabInstance:
 --- !u!4 &4287905008902809210 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: fb40cb79abe176648afd01ccbd480ade, type: 3}
+  m_PrefabInstance: {fileID: 9149913861092838752}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9211806576412764044 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -9138384822779237652, guid: fb40cb79abe176648afd01ccbd480ade, type: 3}
   m_PrefabInstance: {fileID: 9149913861092838752}
   m_PrefabAsset: {fileID: 0}
