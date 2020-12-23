@@ -507,6 +507,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelRounds:
   - {fileID: 11400000, guid: 80af1b2166afecd4f94bcde1292b9dec, type: 2}
+  - {fileID: 11400000, guid: 6ce241dde52f6ad4594667c93a259067, type: 2}
 --- !u!1 &1180046487784274355
 GameObject:
   m_ObjectHideFlags: 0

@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedOfConveyer: 1
+  CanPutBottleOn: 0
 --- !u!1 &8695118243147778632
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,10 +170,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 487752935536943011}
     m_Modifications:
-    - target: {fileID: 1012808539163865649, guid: 4ed6389e18d152b4ab8451575181dfd4, type: 3}
-      propertyPath: m_Size.z
-      value: 0.8
-      objectReference: {fileID: 0}
     - target: {fileID: 1012808539163865650, guid: 4ed6389e18d152b4ab8451575181dfd4, type: 3}
       propertyPath: m_RootOrder
       value: 0
