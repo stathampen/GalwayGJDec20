@@ -651,7 +651,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 90.42034, y: 87.5447, z: 90.80339}
   m_Center: {x: -2.8999224, y: 124.51529, z: 1.4364383}
---- !u!82 &7413461953416957794
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
