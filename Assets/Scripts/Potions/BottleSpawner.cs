@@ -6,6 +6,8 @@ public class BottleSpawner : MonoBehaviour
 	[SerializeField] private float timeBetweenSpawnsSecs;
 	[SerializeField] private Transform spawnTransform;
 
+	public AudioSource audioSource;
+
 	private float _timer;
 
 	public bool CanSpawnBottles
@@ -22,6 +24,8 @@ public class BottleSpawner : MonoBehaviour
 
 			if (_timer >= timeBetweenSpawnsSecs)
 			{
+				
+				audioSource.Play();
 				var bottle = Instantiate(bottlePrefab, spawnTransform.position, spawnTransform.rotation);
 				bottle.GetComponent<Bottle>().Init();
 

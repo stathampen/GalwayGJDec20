@@ -7,6 +7,8 @@ public class Conveyer : MonoBehaviour
 	private Vector3 _direction;
 	private readonly List<Rigidbody> _bodiesToPush = new List<Rigidbody>(16);
 
+	public bool CanPutBottleOn;
+
 	public void RemoveRigidbody(Bottle bottleToRemove)
 	{
 		var index = _bodiesToPush.FindIndex(rigidBody => rigidBody.GetInstanceID() ==
@@ -29,8 +31,15 @@ public class Conveyer : MonoBehaviour
 		var bodiesToPushCopy = new List<Rigidbody>(_bodiesToPush);
 		foreach (var body in bodiesToPushCopy)
 		{
-			body.MovePosition(body.position + pushForce);
-			if (body.gameObject.activeSelf)
+			if (body)
+			{
+				body.MovePosition(body.position + pushForce);
+				if (!body.gameObject.activeSelf)
+				{
+					_bodiesToPush.Remove(body);
+				}
+			}
+			else
 			{
 				_bodiesToPush.Remove(body);
 			}

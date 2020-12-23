@@ -107,7 +107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1122002648521126123}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.033, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6321302114986858402}
@@ -124,7 +124,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.1, z: 1}
+  m_Size: {x: 1, y: 0.05, z: 1}
   m_Center: {x: 0, y: 0.06, z: 0}
 --- !u!114 &1122002648521126134
 MonoBehaviour:
@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedOfConveyer: 1
+  CanPutBottleOn: 1
 --- !u!1 &2577095582355096117
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,7 +299,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 0.81, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &3669549366399530457
 GameObject:

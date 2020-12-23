@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
                     var col = colliders[i];
 
                     var conveyer = col.GetComponent<Conveyer>();
-                    if (conveyer)
+                    if (conveyer && conveyer.CanPutBottleOn)
                     {
                         if (!convenyerCollider)
                         {
@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
             if (conveyerToUse)
             {
                 var bottleToPlace = Bottle;
-                bottleToPlace.Drop(convenyerCollider.bounds.center + new Vector3(0, convenyerCollider.bounds.center.y + 0.4f));
+                bottleToPlace.Drop(convenyerCollider.bounds.center + new Vector3(0, convenyerCollider.bounds.center.y + 1f));
                 Bottle = null;
             }
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
@@ -11,6 +12,17 @@ public class LevelController : MonoBehaviour
 	private readonly List<BottleSpawner> _bottleSpawners = new List<BottleSpawner>();
 
 	private int _currentRound;
+
+	private int _currentFailsAllowed = 5;
+
+	private int[] _currentSuccessesAllowed = new int[10];
+
+	private bool[] _successTable = new bool[10];
+
+	public int[] CurrentSuccessesAllowed
+	{
+		get => _currentSuccessesAllowed;
+	}
 
 	public void OnEnable()
 	{
@@ -40,11 +52,26 @@ public class LevelController : MonoBehaviour
 			_currentLevel.SetActive(false);
 		}
 		_currentLevel = Instantiate(levelRounds[_currentRound].prefab);
+		_currentFailsAllowed = levelRounds[_currentRound].maxMissesCount;
+		for (var i = 0; i < levelRounds[_currentRound].typesWanted.Length; i++)
+		{
+			_currentSuccessesAllowed[i] = levelRounds[_currentRound].typesWanted[i].potionCount;
+		}
+		_successTable = new bool[levelRounds[_currentRound].typesWanted.Length];
+
+		for (var i = 0; i < _successTable.Length; i++)
+		{
+			_successTable[i] = false;
+		}
+
 		var spawnerObjects = GameObject.FindGameObjectsWithTag("BottleSpawner");
+
+		Debug.Log("Found spawners: " + spawnerObjects.Length);
 
 		foreach (var spawnerObject in spawnerObjects)
 		{
 			var spawner = spawnerObject.GetComponent<BottleSpawner>();
+			spawner.CanSpawnBottles = true;
 			_bottleSpawners.Add(spawner);
 		}
 	}
@@ -52,56 +79,87 @@ public class LevelController : MonoBehaviour
 	//check the user has passed the right potion
 	public void CheckPotion(string potionName)
 	{
-		//first check if the potion is one we want
+		var breakLoop = false;
 		for (var i = 0; i < levelRounds[_currentRound].typesWanted.Length; i++)
 		{
 			//the user has passed a correct potion
-			if (potionName == levelRounds[_currentRound].typesWanted[i].potionName)
+			if (!breakLoop)
 			{
-				//AND still want more of those potions
-				if(levelRounds[_currentRound].typesWanted[i].potionCount > 0)
+				if (potionName == levelRounds[_currentRound].typesWanted[i].potionName)
 				{
-					levelRounds[_currentRound].typesWanted[i].potionCount--;
+					//AND still want more of those potions
+					_currentSuccessesAllowed[i]--;
+					if(_currentSuccessesAllowed[i] == 0)
+					{
+						// advance the level routine
+						_successTable[i] = true;
+					}
+					else
+					{
+						breakLoop = true;
+					}
 				}
 				else
 				{
-					// advance the level routine
-					AdvanceLevel();
+					FailedPotion();
 				}
 			}
-			else
+		}
+
+		foreach (var success in _successTable)
+		{
+			if (!success)
 			{
-				FailedPotion();
+				return;
 			}
 		}
+
+		AdvanceLevel();
 	}
 
 	//either wrong or broken potion
 	public void FailedPotion()
 	{
-		levelRounds[_currentRound].maxMissesCount--;
+		_currentFailsAllowed--;
 
-		if(levelRounds[_currentRound].maxMissesCount <= 0)
+		if(_currentFailsAllowed <= 0)
 		{
 			EndGame();
 		}
 	}
 
+	public string GetPotionName(int i)
+	{
+		return levelRounds[_currentRound].typesWanted[i].potionName;
+	}
+
+	public int GetRemainingPotions(int i)
+	{
+		return _currentSuccessesAllowed[i];
+	}
+
+	public int GetListPotions()
+	{
+		return levelRounds[_currentRound].typesWanted.Length;
+	}
+
 	// move to the next level
 	private void AdvanceLevel()
 	{
-		Debug.Log("current round: " + _currentRound);
-
 		//as long as the current round is less that the max number of rounds the game can continue
-		if(_currentRound < levelRounds.Length)
+		if(_currentRound < levelRounds.Length - 1)
 		{
 			_currentRound++; //to the next round
 			LoadLevel();
 		}
 		else
 		{
-			//need to do a better way than killing the programme
-			Application.Quit();
+			foreach (var spawner in _bottleSpawners)
+			{
+				spawner.CanSpawnBottles = false;
+			}
+			_bottleSpawners.Clear();
+			SceneManager.LoadScene("FinalScene");
 		}
 	}
 
@@ -111,8 +169,7 @@ public class LevelController : MonoBehaviour
 		{
 			spawner.CanSpawnBottles = false;
 		}
-
 		Debug.Log("END GAME");
+		SceneManager.LoadScene("FinalScene");
 	}
 }
-

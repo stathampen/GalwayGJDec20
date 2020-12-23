@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class PotionFiller : MonoBehaviour
 {
+	public AudioSource audioSource;
 	[SerializeField] private Potion potion;
 	private void OnTriggerEnter(Collider other)
 	{
@@ -44,7 +45,7 @@ public class PotionFiller : MonoBehaviour
 						break;
 
 					default:
-						bottle.BreakBottle(false);
+						bottle.BreakBottle();
 						break;
 				}
 			}
@@ -53,6 +54,8 @@ public class PotionFiller : MonoBehaviour
 
 	private void setNewPotion(Bottle bottle, String newPotionName)
 	{
+		audioSource.Play();
+
 		var success = false;
 		for (var i = 0; i < bottle.potions.Length; i++)
 		{
