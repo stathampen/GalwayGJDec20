@@ -185,6 +185,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e95fc51c47f5ff40a668328acc39281, type: 3}
+--- !u!1 &1644131928 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4468048248312457450, guid: 78e81e88a98aae349b5ecb60c035310b, type: 3}
+  m_PrefabInstance: {fileID: 2055026095}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1644131933 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4468048248312457430, guid: 78e81e88a98aae349b5ecb60c035310b, type: 3}
@@ -211,39 +216,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4468048248312457430, guid: 78e81e88a98aae349b5ecb60c035310b, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4468048248312457430, guid: 78e81e88a98aae349b5ecb60c035310b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4468048248312457430, guid: 78e81e88a98aae349b5ecb60c035310b, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4468048248312457430, guid: 78e81e88a98aae349b5ecb60c035310b, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4468048248312457430, guid: 78e81e88a98aae349b5ecb60c035310b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 662
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4468048248312457430, guid: 78e81e88a98aae349b5ecb60c035310b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 508
-      objectReference: {fileID: 0}
-    - target: {fileID: 4468048248312457430, guid: 78e81e88a98aae349b5ecb60c035310b, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.900302
-      objectReference: {fileID: 0}
-    - target: {fileID: 4468048248312457430, guid: 78e81e88a98aae349b5ecb60c035310b, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.900302
-      objectReference: {fileID: 0}
-    - target: {fileID: 4468048248312457430, guid: 78e81e88a98aae349b5ecb60c035310b, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.900302
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 4468048248312457430, guid: 78e81e88a98aae349b5ecb60c035310b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -275,11 +268,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4468048248312457430, guid: 78e81e88a98aae349b5ecb60c035310b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 959.99994
+      value: -125
       objectReference: {fileID: 0}
     - target: {fileID: 4468048248312457430, guid: 78e81e88a98aae349b5ecb60c035310b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 736.6767
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4468048248312457430, guid: 78e81e88a98aae349b5ecb60c035310b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -300,18 +293,6 @@ PrefabInstance:
     - target: {fileID: 4468048248312457450, guid: 78e81e88a98aae349b5ecb60c035310b, type: 3}
       propertyPath: m_Name
       value: PlayerUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 4468048248312457450, guid: 78e81e88a98aae349b5ecb60c035310b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4468048249388657032, guid: 78e81e88a98aae349b5ecb60c035310b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4468048249626291529, guid: 78e81e88a98aae349b5ecb60c035310b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78e81e88a98aae349b5ecb60c035310b, type: 3}
@@ -1599,7 +1580,7 @@ MonoBehaviour:
   mainMenuFab: {fileID: 41779249}
   buttonsPanel: {fileID: 7706423067793640571}
   titlePanel: {fileID: 849168124448414230}
-  playerUIPanel: {fileID: 0}
+  playerUIPanel: {fileID: 1644131928}
 --- !u!224 &7419433796648404205
 RectTransform:
   m_ObjectHideFlags: 0
