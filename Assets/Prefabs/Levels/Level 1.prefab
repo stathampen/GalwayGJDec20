@@ -329,7 +329,7 @@ PrefabInstance:
       objectReference: {fileID: 5201126206544063533}
     - target: {fileID: 7528727081539380871, guid: 8d0b1f4944fd9964d983806cb914ab03, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 2.5523114
+      value: 1.5563798
       objectReference: {fileID: 0}
     - target: {fileID: 7528727081539380888, guid: 8d0b1f4944fd9964d983806cb914ab03, type: 3}
       propertyPath: m_LocalRotation.w
@@ -909,6 +909,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 39.1
       objectReference: {fileID: 0}
+    - target: {fileID: 3328713323476950545, guid: 948ee8d2a418be84c95fb69466ac554e, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 3230839676757786693}
     - target: {fileID: 4874434439644685811, guid: 948ee8d2a418be84c95fb69466ac554e, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -974,6 +978,11 @@ PrefabInstance:
 --- !u!4 &2987062130776489960 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5258345838764575527, guid: 948ee8d2a418be84c95fb69466ac554e, type: 3}
+  m_PrefabInstance: {fileID: 7029354311129986255}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &3230839676757786693 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5574179881922704522, guid: 948ee8d2a418be84c95fb69466ac554e, type: 3}
   m_PrefabInstance: {fileID: 7029354311129986255}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7111692636727668272
