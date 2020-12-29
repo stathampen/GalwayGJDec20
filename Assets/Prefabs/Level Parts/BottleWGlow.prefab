@@ -40,7 +40,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1904265271310522907}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 0b1381cafb7a3e544b6d08f8f23955a7, type: 3}
+  m_Asset: {fileID: 0}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -89,8 +89,7 @@ VFXRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -344,10 +343,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0ec01889c6611aa49babf111c0c86dfa, type: 2}
   - {fileID: 11400000, guid: 88d3523d5a50677419147823d1381d68, type: 2}
   bottleModel: {fileID: 7304315228947831981}
-  currentMaterial: {fileID: 0}
   body: {fileID: 1505557268101673465}
-  potionGlow: {fileID: 1904265271310522907}
   explosionPrefab: {fileID: 3824368321581207604, guid: 958201e42da5e7a499383a1d03ad1420, type: 3}
+  objCollider: {fileID: 1505557268101673464}
 --- !u!54 &1505557268101673465
 Rigidbody:
   m_ObjectHideFlags: 0

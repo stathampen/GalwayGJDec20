@@ -9,11 +9,9 @@ public class PotionPanelController : MonoBehaviour
     public TextMeshProUGUI countText;
     public TextMeshProUGUI bottleText;
 
-    public Bottle displayBottle;
-
     public void setDisplayText(int _potionCount)
     {
-        countText.text = _potionCount.ToString() + " X ";
+        countText.text = _potionCount + " X ";
     }
 
     public void setDisplayBottleText(string _potionName)

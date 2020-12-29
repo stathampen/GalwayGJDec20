@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25d484ab6bd2094458a4ea2fe14591d1, type: 3}
   m_Name: LevelThree
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   maxMissesCount: 50
+=======
+  maxMissesCount: 3
+>>>>>>> e8437237697aadebb3afe3380c5588fdffd6dbca
   typesWanted:
   - potionName: Red
     potionCount: 5

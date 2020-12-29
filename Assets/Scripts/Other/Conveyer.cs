@@ -7,7 +7,7 @@ public class Conveyer : MonoBehaviour
 	private Vector3 _direction;
 	private readonly List<Rigidbody> _bodiesToPush = new List<Rigidbody>(16);
 
-	public bool CanPutBottleOn;
+	public bool canPutBottleOn;
 
 	public void RemoveRigidbody(Bottle bottleToRemove)
 	{
@@ -16,6 +16,8 @@ public class Conveyer : MonoBehaviour
 
 		if (index > -1)
 		{
+			var body = _bodiesToPush[index];
+			body.velocity = Vector3.zero;
 			_bodiesToPush.RemoveAt(index);
 		}
 	}

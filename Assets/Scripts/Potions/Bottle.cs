@@ -1,18 +1,19 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Collider))]
 public class Bottle : MonoBehaviour
 {
 	public Potion [] potions;
 
 	public GameObject bottleModel;
 
-	public Material currentMaterial;
-
 	public Rigidbody body;
 
 	private LevelController _levelController;
+
 	[SerializeField] private GameObject explosionPrefab;
+	[SerializeField] private Collider objCollider;
 
 	private Transform _transformToFollow;
 
@@ -24,6 +25,7 @@ public class Bottle : MonoBehaviour
 
 	public void Grab(Transform transformToFollow)
 	{
+		objCollider.enabled = false;
 		body.position = transformToFollow.position;
 		body.rotation = Quaternion.identity;
 		body.isKinematic = true;
@@ -44,13 +46,14 @@ public class Bottle : MonoBehaviour
 		body.mass = 1;
 		body.detectCollisions = true;
 		body.WakeUp();
+		objCollider.enabled = true;
 		body.rotation = Quaternion.identity;
 		body.position = dropPosition;
 	}
 
 	public void Init()
 	{
-		this._levelController = GameObject.FindWithTag("LevelController").GetComponent<LevelController>();
+		_levelController = GameObject.FindWithTag("LevelController").GetComponent<LevelController>();
 	}
 
 	public void SetPotion(int potionNumber)
@@ -89,7 +92,6 @@ public class Bottle : MonoBehaviour
         // Get the current material applied on the GameObject
         // Set the new material on the GameObject
         meshRenderer.material = newMaterial;
-        currentMaterial = meshRenderer.material;
 	}
 
 	private void Update()

@@ -17,14 +17,9 @@ public class LevelController : MonoBehaviour
 
 	private int _currentFailsAllowed = 5;
 
-	private int[] _currentSuccessesAllowed = new int[10];
+	private readonly int[] _currentSuccessesAllowed = new int[10];
 
 	private bool[] _successTable = new bool[10];
-
-	public int[] CurrentSuccessesAllowed
-	{
-		get => _currentSuccessesAllowed;
-	}
 
 	public void OnEnable()
 	{
@@ -66,9 +61,15 @@ public class LevelController : MonoBehaviour
 			_successTable[i] = false;
 		}
 
-		var spawnerObjects = GameObject.FindGameObjectsWithTag("BottleSpawner");
+		var bottles = GameObject.FindGameObjectsWithTag("PotionBottle");
 
-		Debug.Log("Found spawners: " + spawnerObjects.Length);
+		foreach (var bottle in bottles)
+		{
+			bottle.SetActive(false);
+			Destroy(bottle);
+		}
+
+		var spawnerObjects = GameObject.FindGameObjectsWithTag("BottleSpawner");
 
 		//move the player back to the starting spot
 		playerObject.transform.position = GameObject.FindGameObjectWithTag("PlayerSpawner").transform.position;		
