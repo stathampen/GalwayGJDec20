@@ -1,12 +1,8 @@
-﻿using System;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float baseSpeed;
-    [SerializeField] private Rigidbody body;
     [SerializeField] private float raycastRadius = 0.5f;
     [SerializeField] private Transform bottleHoldPoint;
     [SerializeField] private CapsuleCollider capsuleCollider;
@@ -57,6 +53,13 @@ public class PlayerController : MonoBehaviour
 
         _currentMovement = Vector3.ClampMagnitude(_currentMovement, baseSpeed * 2);
 
+        GetBottleInput();
+
+        MovementUpdate();
+    }
+
+    private void GetBottleInput()
+    {
         if (Input.GetKeyDown(KeyCode.E))
         {
             var position = transform.position + capsuleCollider.center;
@@ -77,7 +80,7 @@ public class PlayerController : MonoBehaviour
                             if (!bottleCollider)
                             {
                                 Debug.Log("get bottle");
-                                bottleToGrab =col.GetComponent<Bottle>();
+                                bottleToGrab = col.GetComponent<Bottle>();
                                 bottleCollider = col;
                             }
 
@@ -85,7 +88,7 @@ public class PlayerController : MonoBehaviour
                                 Vector3.Distance(position, bottleCollider.transform.position) >
                                 Vector3.Distance(position, col.transform.position))
                             {
-                                bottleToGrab =col.GetComponent<Bottle>();
+                                bottleToGrab = col.GetComponent<Bottle>();
                                 bottleCollider = col;
                             }
                         }
@@ -151,36 +154,133 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position + capsuleCollider.center, raycastRadius);
     }
 
-    // modified from https://nightowl.games/blog/unity/custom-character-controller-in-unity/ and Unity documentation
-    private void FixedUpdate()
+    // based on SuperCharacterCollider
+    private void MovementUpdate()
     {
-        var numOverlaps = Physics.OverlapCapsuleNonAlloc(
-            transform.position + capsuleCollider.center + (Vector3.up * -capsuleCollider.height / 2),
-            transform.position + capsuleCollider.center + new Vector3(0, capsuleCollider.height / 2),
-            capsuleCollider.radius,
-            _colliders);
+        // we're going to use a fixed time step, but via Update, so we can have more control
+        var delta = Time.deltaTime;
 
-        for (var i = 0; i < numOverlaps; i++)
+        while (delta > Time.fixedDeltaTime)
         {
-            var overlappedCollider = _colliders[i];
-            if (Physics.ComputePenetration(capsuleCollider,
-                transform.position,
-                transform.rotation,
-                overlappedCollider,
-                overlappedCollider.transform.position,
-                overlappedCollider.transform.rotation,
-                out var direction,
-                out var distance) && capsuleCollider != overlappedCollider)
-            {
-                var penetrationVector = direction * distance;
-                var velocityProjection = Vector3.Project(_currentMovement, -direction);
-                transform.position += penetrationVector;
-                _currentMovement -= velocityProjection;
-                Debug.Log("penetrated collider: " + overlappedCollider + ", name: "
-                    + overlappedCollider.gameObject.name + ", distance: " + distance + ", direction: " + direction);
-            }
+            SingleMovementStep();
+            delta -= Time.fixedDeltaTime;
         }
-        transform.position += (_currentMovement * Time.deltaTime);
+
+        if (delta > 0f)
+        {
+            SingleMovementStep();
+        }
+
+        transform.position += _currentMovement * delta;
+    }
+
+    private void SingleMovementStep()
+    {
+        RecursivePushback(0, 2);
+    }
+
+    // modified from https://nightowl.games/blog/unity/custom-character-controller-in-unity/, SuperCharacterController and Unity documentation
+    private void RecursivePushback(int depth, int maxDepth)
+    {
+        while (true)
+        {
+            var centerPosition = transform.position + capsuleCollider.center;
+            var numOverlaps = Physics.OverlapCapsuleNonAlloc(centerPosition + (Vector3.up * -capsuleCollider.height / 2),
+                centerPosition + new Vector3(0, capsuleCollider.height / 2),
+                capsuleCollider.radius,
+                _colliders);
+
+            var contact = false;
+
+            for (var i = 0; i < numOverlaps; i++)
+            {
+                var overlappedCollider = _colliders[i];
+
+                if (capsuleCollider != overlappedCollider && ClosestPointOnSurface(overlappedCollider, centerPosition, out var contactPoint))
+                {
+                    var pushbackVector = contactPoint - centerPosition;
+
+                    if (pushbackVector != Vector3.zero)
+                    {
+                        if (Physics.SphereCast(new Ray(centerPosition, pushbackVector.normalized),
+                            0.01f,
+                            pushbackVector.magnitude + 0.01f))
+                        {
+                            if (Vector3.Distance(centerPosition, contactPoint) < capsuleCollider.radius)
+                            {
+                                pushbackVector = pushbackVector.normalized * ((capsuleCollider.radius - pushbackVector.magnitude) * -1);
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            pushbackVector = pushbackVector.normalized *
+                                (capsuleCollider.radius + pushbackVector.magnitude);
+                        }
+
+                        contact = true;
+
+                        transform.position += pushbackVector;
+                    }
+                }
+            }
+
+            if (depth < maxDepth && contact)
+            {
+                depth = depth + 1;
+                continue;
+            }
+
+            break;
+        }
+    }
+
+    private bool ClosestPointOnSurface(Collider collider, Vector3 toPoint, out Vector3 contactPoint)
+    {
+        if (collider is BoxCollider)
+        {
+            var boxCollider = (BoxCollider) collider;
+            var colliderTransform = boxCollider.transform;
+
+            var localPoint = colliderTransform.InverseTransformPoint(toPoint) - boxCollider.center;
+
+            var halfSizeOfBox = boxCollider.size / 2;
+
+            var localNormals = new Vector3(Mathf.Clamp(localPoint.x, -halfSizeOfBox.x, halfSizeOfBox.x),
+                Mathf.Clamp(localPoint.y, -halfSizeOfBox.y, halfSizeOfBox.y),
+                Mathf.Clamp(localPoint.z, -halfSizeOfBox.z, halfSizeOfBox.z));
+
+            var distanceX = Mathf.Min(Mathf.Abs(halfSizeOfBox.x - localNormals.x),
+                Mathf.Abs(-halfSizeOfBox.x - localNormals.x));
+            var distanceY = Mathf.Min(Mathf.Abs(halfSizeOfBox.y - localNormals.y),
+                Mathf.Abs(-halfSizeOfBox.y - localNormals.y));
+            var distanceZ = Mathf.Min(Mathf.Abs(halfSizeOfBox.z - localNormals.z),
+                Mathf.Abs(-halfSizeOfBox.z - localNormals.z));
+
+            if (distanceX < distanceY && distanceX < distanceZ)
+            {
+                localNormals.x = Mathf.Sign(localNormals.x) * halfSizeOfBox.x;
+            }
+            else if (distanceX < distanceY && distanceX < distanceZ)
+            {
+                localNormals.x = Mathf.Sign(localNormals.x) * halfSizeOfBox.x;
+            }
+            else if (distanceX < distanceY && distanceX < distanceZ)
+            {
+                localNormals.x = Mathf.Sign(localNormals.x) * halfSizeOfBox.x;
+            }
+
+            localNormals += boxCollider.center;
+
+            contactPoint = colliderTransform.TransformPoint(localNormals);
+
+            return true;
+        }
+        contactPoint = Vector3.zero;
+        return false;
     }
 
     /*
