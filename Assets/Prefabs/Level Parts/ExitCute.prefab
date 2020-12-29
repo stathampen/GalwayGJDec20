@@ -582,7 +582,7 @@ GameObject:
   - component: {fileID: 4407217818012792508}
   - component: {fileID: 3328713323476950545}
   - component: {fileID: 696731398833090514}
-  - component: {fileID: 7413461953416957794}
+  - component: {fileID: 5574179881922704522}
   m_Layer: 0
   m_Name: ExitCute
   m_TagString: Untagged
@@ -637,7 +637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bcd9dcd250fcb143b20058d2db403c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 7413461953416957794}
+  audioSource: {fileID: 0}
 --- !u!65 &696731398833090514
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -651,6 +651,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 90.42034, y: 87.5447, z: 90.80339}
   m_Center: {x: -2.8999224, y: 124.51529, z: 1.4364383}
+--- !u!82 &5574179881922704522
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
