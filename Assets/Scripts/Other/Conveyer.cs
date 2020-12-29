@@ -52,7 +52,6 @@ public class Conveyer : MonoBehaviour
 
 		if (bottle)
 		{
-			Debug.Log("adding body");
 			_bodiesToPush.Add(bottle.body);
 		}
 	}
@@ -62,7 +61,6 @@ public class Conveyer : MonoBehaviour
 		var bottle = other.GetComponent<Bottle>();
 		if (bottle)
 		{
-			Debug.Log("removing body");
 			RemoveRigidbody(bottle);
 		}
 	}
