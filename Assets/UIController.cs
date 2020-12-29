@@ -20,14 +20,14 @@ public class UIController : MonoBehaviour
     private void Update() {
         PopulateUI();
     }
-    
-    public void MakePanels ()
+
+    public void MakePanels()
     {
         int potionNo = levelController.GetListPotions();
 
         for(int i = 0; i < potionNo; i++)
         {
-            GameObject Panel = Instantiate(potionPanelPrefab, 
+            GameObject Panel = Instantiate(potionPanelPrefab,
             new Vector3(potionPanelPos.transform.position.x, potionPanelPos.transform.position.y + (3 * i), potionPanelPos.transform.position.z),
             gameObject.transform.rotation,
             gameObject.transform);
@@ -40,7 +40,7 @@ public class UIController : MonoBehaviour
 
     private void PopulateUI()
     {
-        
+
         for (int i = 0; i < panelArray.Count; i++)
         {
             panelArray[i].GetComponent<PotionPanelController>().setDisplayText(
@@ -52,5 +52,5 @@ public class UIController : MonoBehaviour
             );
         }
     }
-    
+
 }
