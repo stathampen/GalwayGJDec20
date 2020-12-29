@@ -170,22 +170,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1993130894988909415, guid: 000ef1737e07a4c48bafff1dd6200388, type: 3}
-      propertyPath: antialiasingMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1993130894988909415, guid: 000ef1737e07a4c48bafff1dd6200388, type: 3}
-      propertyPath: volumeLayer.m_Bits
-      value: 256
-      objectReference: {fileID: 0}
-    - target: {fileID: 1993130894988909415, guid: 000ef1737e07a4c48bafff1dd6200388, type: 3}
-      propertyPath: fastApproximateAntialiasing.fastMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5201126206544063529, guid: 000ef1737e07a4c48bafff1dd6200388, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5710399545116720082, guid: 000ef1737e07a4c48bafff1dd6200388, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -228,14 +212,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5710399545116720082, guid: 000ef1737e07a4c48bafff1dd6200388, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6964859539813655325, guid: 000ef1737e07a4c48bafff1dd6200388, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6964859539813655325, guid: 000ef1737e07a4c48bafff1dd6200388, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -304,7 +280,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1055274479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,7 +310,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.3031496, y: 1}
+    m_SensorSize: {x: 1.1895522, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -442,7 +418,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1495711695
 MonoBehaviour:
   m_ObjectHideFlags: 0
