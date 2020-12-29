@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 487516158099655452}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.95, y: 0.013166785, z: -5.75}
+  m_LocalPosition: {x: 1.85, y: 0, z: -5.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6854893510487926198}
@@ -363,11 +363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487752935536943011, guid: 8eed101d69cf02944b53c8c86dd2cf2f, type: 3}
       propertyPath: m_LocalPosition.y
-<<<<<<< HEAD:Assets/Prefabs/Levels/LevelLayout2.prefab
       value: -0.4868332
-=======
-      value: -0.073
->>>>>>> e8437237697aadebb3afe3380c5588fdffd6dbca:Assets/Prefabs/Levels/Level 1.prefab
       objectReference: {fileID: 0}
     - target: {fileID: 487752935536943011, guid: 8eed101d69cf02944b53c8c86dd2cf2f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -881,11 +877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6321302114986858402, guid: 483d94eaa75f82e4f83b67c6436816af, type: 3}
       propertyPath: m_LocalPosition.y
-<<<<<<< HEAD:Assets/Prefabs/Levels/LevelLayout2.prefab
       value: 0.29216683
-=======
-      value: -0.25
->>>>>>> e8437237697aadebb3afe3380c5588fdffd6dbca:Assets/Prefabs/Levels/Level 1.prefab
       objectReference: {fileID: 0}
     - target: {fileID: 6321302114986858402, guid: 483d94eaa75f82e4f83b67c6436816af, type: 3}
       propertyPath: m_LocalPosition.z
