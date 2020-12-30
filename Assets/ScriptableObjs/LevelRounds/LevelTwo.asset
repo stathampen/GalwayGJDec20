@@ -18,4 +18,4 @@ MonoBehaviour:
     potionCount: 3
   - potionName: Magenta
     potionCount: 3
-  prefab: {fileID: 8016724188213295898, guid: 12cfd1c3e99f9eb4f842d42b3ebf7b7d, type: 3}
+  prefab: {fileID: 6854893510487926199, guid: 072906455b4c3ac43b13c7b4fa7f4313, type: 3}
