@@ -49,7 +49,9 @@ public class LevelController : MonoBehaviour
 			_currentLevel.SetActive(false);
 		}
 		_currentLevel = Instantiate(levelRounds[_currentRound].prefab);
+
 		_currentFailsAllowed = levelRounds[_currentRound].maxMissesCount;
+		
 		for (var i = 0; i < levelRounds[_currentRound].typesWanted.Length; i++)
 		{
 			_currentSuccessesAllowed[i] = levelRounds[_currentRound].typesWanted[i].potionCount;
@@ -96,7 +98,9 @@ public class LevelController : MonoBehaviour
 				if (potionName == levelRounds[_currentRound].typesWanted[i].potionName)
 				{
 					//AND still want more of those potions
-					_currentSuccessesAllowed[i]--;
+					if(_currentSuccessesAllowed[i] > 0)
+					{
+						_currentSuccessesAllowed[i]--;
 					if(_currentSuccessesAllowed[i] == 0)
 					{
 						// advance the level routine
@@ -111,6 +115,7 @@ public class LevelController : MonoBehaviour
 				{
 					FailedPotion();
 				}
+					}
 			}
 		}
 
@@ -149,6 +154,11 @@ public class LevelController : MonoBehaviour
 	public int GetListPotions()
 	{
 		return levelRounds[_currentRound].typesWanted.Length;
+	}
+
+	public int GetRemainingMisses()
+	{
+		return _currentFailsAllowed;
 	}
 
 	// move to the next level

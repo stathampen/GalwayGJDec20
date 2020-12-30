@@ -25,14 +25,28 @@ public class UIController : MonoBehaviour
     {
         int potionNo = levelController.GetListPotions();
 
-        for(int i = 0; i < potionNo; i++)
-        {
-            GameObject Panel = Instantiate(potionPanelPrefab,
-            new Vector3(potionPanelPos.transform.position.x, potionPanelPos.transform.position.y + (3 * i), potionPanelPos.transform.position.z),
-            gameObject.transform.rotation,
+        float panelHeight = potionPanelPrefab.GetComponent<RectTransform>().rect.height;
+
+        //put the number of failures at the bottom of the ui
+        GameObject failPanel = Instantiate(potionPanelPrefab,
+            new Vector3(potionPanelPos.transform.position.x, potionPanelPos.transform.position.y, potionPanelPos.transform.position.z),
+            gameObject.transform.rotation,                                                                              //gives the panels a little gap between each
             gameObject.transform);
 
-            panelArray.Add(Panel);
+            failPanel.GetComponent<PotionPanelController>().setDisplayBottleText(
+                "Misses Allowed"
+            );
+
+            panelArray.Add(failPanel);
+
+        for(int i = 1; i < potionNo; i++)
+        {
+            GameObject potionPanel = Instantiate(potionPanelPrefab,
+            new Vector3(potionPanelPos.transform.position.x, potionPanelPos.transform.position.y + ( (panelHeight + panelHeight/2) * i), potionPanelPos.transform.position.z),
+            gameObject.transform.rotation,                                                                              //gives the panels a little gap between each
+            gameObject.transform);
+
+            panelArray.Add(potionPanel);
         }
 
         PopulateUI();
@@ -41,7 +55,11 @@ public class UIController : MonoBehaviour
     private void PopulateUI()
     {
 
-        for (int i = 0; i < panelArray.Count; i++)
+        panelArray[0].GetComponent<PotionPanelController>().setDisplayText(
+                levelController.GetRemainingMisses()
+            );
+
+        for (int i = 1; i < panelArray.Count; i++)
         {
             panelArray[i].GetComponent<PotionPanelController>().setDisplayText(
                 levelController.GetRemainingPotions(i)
