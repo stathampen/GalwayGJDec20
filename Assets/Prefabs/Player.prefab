@@ -55,7 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70c8be264ea6f5e4eab45369a8b22637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 2
+  baseSpeed: 10
   raycastRadius: 0.55
   bottleHoldPoint: {fileID: 6481388605459820400}
   capsuleCollider: {fileID: 1826858406409090258}
