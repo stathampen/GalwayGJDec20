@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,49 +15,64 @@ public class PlayerController : MonoBehaviour
 
     private readonly Collider[] _colliders = new Collider[16];
 
+    private List<float> _sphereOffsets = new List<float>();
+
     public Bottle Bottle
     {
         get;
         private set;
     }
 
-    private Vector3 _currentMovement = Vector3.zero;
+    private Vector3 _movement = Vector3.zero;
+
+    void Awake()
+    {
+        var numCapsulesNeeded = Mathf.RoundToInt(CapsuleHeight / CapsuleRadius);
+        numCapsulesNeeded = numCapsulesNeeded > 1 ? numCapsulesNeeded - 1 : numCapsulesNeeded;
+
+        var currentOffset = 0.0f;
+
+        for (var i = 0; i < numCapsulesNeeded; i++)
+        {
+            currentOffset += CapsuleRadius;
+            _sphereOffsets.Add(currentOffset);
+        }
+    }
 
     private void Update()
     {
         var buttonPressed = false;
+        var moveDirection = Vector3.zero;
         if (Input.GetKey(KeyCode.W))
         {
             buttonPressed = true;
-            _currentMovement += transform.forward * baseSpeed;
+            moveDirection += transform.forward;
         }
         else if (Input.GetKey(KeyCode.S))
         {
             buttonPressed = true;
-            _currentMovement += transform.forward * -baseSpeed;
+            moveDirection += -transform.forward;
         }
 
         if (Input.GetKey(KeyCode.D))
         {
             buttonPressed = true;
-            _currentMovement += transform.right * baseSpeed;
+            moveDirection += transform.right;
         }
         else if (Input.GetKey(KeyCode.A))
         {
             buttonPressed = true;
-            _currentMovement += transform.right * -baseSpeed;
+            moveDirection += -transform.right;
         }
 
         if (!buttonPressed)
         {
-            _currentMovement = Vector3.zero;
+            moveDirection = Vector3.zero;
         }
-
-        _currentMovement = Vector3.ClampMagnitude(_currentMovement, baseSpeed * 2);
 
         GetBottleInput();
 
-        MovementUpdate();
+        MovementUpdate(moveDirection.normalized);
     }
 
     private void GetBottleInput()
@@ -155,10 +172,30 @@ public class PlayerController : MonoBehaviour
     }
 
     // based on SuperCharacterCollider
-    private void MovementUpdate()
+    private void MovementUpdate(Vector3 moveDirection)
     {
         // we're going to use a fixed time step, but via Update, so we can have more control
         var delta = Time.deltaTime;
+
+        if (moveDirection != Vector3.zero)
+        {
+            if (Math.Abs(Mathf.Sign(_movement.x) - Mathf.Sign(moveDirection.x)) > 0.01f)
+            {
+                _movement.x = 0;
+            }
+
+            if (Math.Abs(Mathf.Sign(_movement.z) - Mathf.Sign(moveDirection.z)) > 0.01f)
+            {
+                _movement.z = 0;
+            }
+            _movement = Vector3.MoveTowards(_movement, moveDirection * baseSpeed, (baseSpeed) * delta);
+        }
+        else
+        {
+            _movement = Vector3.zero;
+        }
+
+        transform.position += (_movement) * delta;
 
         while (delta > Time.fixedDeltaTime)
         {
@@ -170,8 +207,6 @@ public class PlayerController : MonoBehaviour
         {
             SingleMovementStep();
         }
-
-        transform.position += _currentMovement * delta;
     }
 
     private void SingleMovementStep()
@@ -184,49 +219,46 @@ public class PlayerController : MonoBehaviour
     {
         while (true)
         {
-            var centerPosition = transform.position + capsuleCollider.center;
-            var numOverlaps = Physics.OverlapCapsuleNonAlloc(centerPosition + (Vector3.up * -capsuleCollider.height / 2),
-                centerPosition + new Vector3(0, capsuleCollider.height / 2),
-                capsuleCollider.radius,
-                _colliders);
-
             var contact = false;
-
-            for (var i = 0; i < numOverlaps; i++)
+            foreach (var offset in _sphereOffsets)
             {
-                var overlappedCollider = _colliders[i];
+                var spherePosition = transform.position + offset * transform.up;
+                var numOverlaps = Physics.OverlapSphereNonAlloc(spherePosition, CapsuleRadius, _colliders);
 
-                if (capsuleCollider != overlappedCollider && ClosestPointOnSurface(overlappedCollider, centerPosition, out var contactPoint))
+                for (var i = 0; i < numOverlaps; i++)
                 {
-                    var pushbackVector = contactPoint - centerPosition;
+                    var overlappedCollider = _colliders[i];
 
-                    if (pushbackVector != Vector3.zero)
+                    if (capsuleCollider == overlappedCollider ||
+                        !ClosestPointOnSurface(overlappedCollider, spherePosition, out var contactPoint)) continue;
+                    var pushbackVector = contactPoint - spherePosition;
+
+                    if (pushbackVector == Vector3.zero) continue;
+                    if (Physics.SphereCast(new Ray(spherePosition, pushbackVector.normalized),
+                        0.01f,
+                        pushbackVector.magnitude + 0.01f))
                     {
-                        if (Physics.SphereCast(new Ray(centerPosition, pushbackVector.normalized),
-                            0.01f,
-                            pushbackVector.magnitude + 0.01f))
+                        if (Vector3.Distance(spherePosition, contactPoint) < CapsuleRadius)
                         {
-                            if (Vector3.Distance(centerPosition, contactPoint) < capsuleCollider.radius)
-                            {
-                                pushbackVector = pushbackVector.normalized * ((capsuleCollider.radius - pushbackVector.magnitude) * -1);
-                            }
-                            else
-                            {
-                                continue;
-                            }
+                            pushbackVector = pushbackVector.normalized * ((CapsuleRadius - pushbackVector.magnitude) * -1);
                         }
                         else
                         {
-                            pushbackVector = pushbackVector.normalized *
-                                (capsuleCollider.radius + pushbackVector.magnitude);
+                            continue;
                         }
-
-                        contact = true;
-
-                        transform.position += pushbackVector;
                     }
+                    else
+                    {
+                        pushbackVector = pushbackVector.normalized *
+                            (CapsuleRadius + pushbackVector.magnitude);
+                    }
+
+                    contact = true;
+
+                    transform.position += pushbackVector;
                 }
             }
+
 
             if (depth < maxDepth && contact)
             {
@@ -240,14 +272,13 @@ public class PlayerController : MonoBehaviour
 
     private bool ClosestPointOnSurface(Collider collider, Vector3 toPoint, out Vector3 contactPoint)
     {
-        if (collider is BoxCollider)
+        if (collider is BoxCollider boxCollider)
         {
-            var boxCollider = (BoxCollider) collider;
             var colliderTransform = boxCollider.transform;
 
             var localPoint = colliderTransform.InverseTransformPoint(toPoint) - boxCollider.center;
 
-            var halfSizeOfBox = boxCollider.size / 2;
+            var halfSizeOfBox = boxCollider.size * 0.5f;
 
             var localNormals = new Vector3(Mathf.Clamp(localPoint.x, -halfSizeOfBox.x, halfSizeOfBox.x),
                 Mathf.Clamp(localPoint.y, -halfSizeOfBox.y, halfSizeOfBox.y),
@@ -264,13 +295,13 @@ public class PlayerController : MonoBehaviour
             {
                 localNormals.x = Mathf.Sign(localNormals.x) * halfSizeOfBox.x;
             }
-            else if (distanceX < distanceY && distanceX < distanceZ)
+            else if (distanceY < distanceX && distanceY < distanceZ)
             {
-                localNormals.x = Mathf.Sign(localNormals.x) * halfSizeOfBox.x;
+                localNormals.y = Mathf.Sign(localNormals.y) * halfSizeOfBox.y;
             }
-            else if (distanceX < distanceY && distanceX < distanceZ)
+            else if (distanceZ < distanceX && distanceZ < distanceY)
             {
-                localNormals.x = Mathf.Sign(localNormals.x) * halfSizeOfBox.x;
+                localNormals.z = Mathf.Sign(localNormals.z) * halfSizeOfBox.z;
             }
 
             localNormals += boxCollider.center;
@@ -279,6 +310,8 @@ public class PlayerController : MonoBehaviour
 
             return true;
         }
+
+
         contactPoint = Vector3.zero;
         return false;
     }
