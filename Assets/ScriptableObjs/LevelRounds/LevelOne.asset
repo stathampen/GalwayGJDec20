@@ -16,4 +16,4 @@ MonoBehaviour:
   typesWanted:
   - potionName: Green
     potionCount: 2
-  prefab: {fileID: 1191673368230038694, guid: 000ef1737e07a4c48bafff1dd6200388, type: 3}
+  prefab: {fileID: 554617663322067640, guid: 634d41a719be7eb4e81c1308986b4a56, type: 3}

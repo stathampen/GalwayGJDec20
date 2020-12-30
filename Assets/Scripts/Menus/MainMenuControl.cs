@@ -14,6 +14,7 @@ namespace Menus
 		[SerializeField] private GameObject buttonsPanel;
 		[SerializeField] private GameObject titlePanel;
 		[SerializeField] private GameObject playerUIPanel;
+		[SerializeField] private GameObject gameSceneObject;
 
 		private Image _panelImage;
 		private TextMeshProUGUI _panelText;
@@ -73,6 +74,7 @@ namespace Menus
 			buttonsPanel.SetActive(false);
 			titlePanel.SetActive(false);
 			playerUIPanel.SetActive(true);
+			gameSceneObject.SetActive(true);
 			levelController.LoadLevel();
 		}
 

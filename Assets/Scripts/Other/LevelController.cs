@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class LevelController : MonoBehaviour
 {
 	[SerializeField] private LevelRound [] levelRounds;
+	[SerializeField] private GameObject playerObject;
+
 	private GameObject _currentLevel;
 
 	private readonly List<BottleSpawner> _bottleSpawners = new List<BottleSpawner>();
@@ -68,6 +70,11 @@ public class LevelController : MonoBehaviour
 		}
 
 		var spawnerObjects = GameObject.FindGameObjectsWithTag("BottleSpawner");
+
+		//move the player back to the starting spot, which is defined in the prefab for the level layouts as PlayerStart with the PlayerSpawner tag
+		playerObject.transform.position = GameObject.FindGameObjectWithTag("PlayerSpawner").transform.position;		
+
+		//remove all the bottles currently loaded from the previous level
 
 		foreach (var spawnerObject in spawnerObjects)
 		{
