@@ -25,11 +25,13 @@ public class UIController : MonoBehaviour
     {
         int potionNo = levelController.GetListPotions();
 
+        float panelHeight = potionPanelPrefab.GetComponent<RectTransform>().rect.height;
+
         for(int i = 0; i < potionNo; i++)
         {
             GameObject Panel = Instantiate(potionPanelPrefab,
-            new Vector3(potionPanelPos.transform.position.x, potionPanelPos.transform.position.y + (3 * i), potionPanelPos.transform.position.z),
-            gameObject.transform.rotation,
+            new Vector3(potionPanelPos.transform.position.x, potionPanelPos.transform.position.y + ( (panelHeight + panelHeight/2) * i), potionPanelPos.transform.position.z),
+    gameObject.transform.rotation,                                                                              //gives the panels a little gap between each
             gameObject.transform);
 
             panelArray.Add(Panel);

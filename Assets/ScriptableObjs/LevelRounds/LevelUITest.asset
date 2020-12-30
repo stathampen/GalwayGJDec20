@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25d484ab6bd2094458a4ea2fe14591d1, type: 3}
+  m_Name: LevelUITest
+  m_EditorClassIdentifier: 
+  maxMissesCount: 10
+  typesWanted:
+  - potionName: Green
+    potionCount: 12
+  - potionName: Blue
+    potionCount: 2
+  - potionName: Yellow
+    potionCount: 5
+  prefab: {fileID: 6854893510487926199, guid: 072906455b4c3ac43b13c7b4fa7f4313, type: 3}
