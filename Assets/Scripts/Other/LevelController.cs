@@ -100,7 +100,7 @@ public class LevelController : MonoBehaviour
 					//AND still want more of those potions
 					if(_currentSuccessesAllowed[i] > 0)
 					{
-											_currentSuccessesAllowed[i]--;
+						_currentSuccessesAllowed[i]--;
 					if(_currentSuccessesAllowed[i] == 0)
 					{
 						// advance the level routine
@@ -154,6 +154,11 @@ public class LevelController : MonoBehaviour
 	public int GetListPotions()
 	{
 		return levelRounds[_currentRound].typesWanted.Length;
+	}
+
+	public int GetRemainingMisses()
+	{
+		return _currentFailsAllowed;
 	}
 
 	// move to the next level
