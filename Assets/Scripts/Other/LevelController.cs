@@ -71,7 +71,7 @@ public class LevelController : MonoBehaviour
 
 		var spawnerObjects = GameObject.FindGameObjectsWithTag("BottleSpawner");
 
-		//move the player back to the starting spot
+		//move the player back to the starting spot, which is defined in the prefab for the level layouts as PlayerStart with the PlayerSpawner tag
 		playerObject.transform.position = GameObject.FindGameObjectWithTag("PlayerSpawner").transform.position;		
 
 		//remove all the bottles currently loaded from the previous level
