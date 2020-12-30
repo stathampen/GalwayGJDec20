@@ -10,12 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25d484ab6bd2094458a4ea2fe14591d1, type: 3}
-  m_Name: LevelTwo
+  m_Name: LevelThree
   m_EditorClassIdentifier: 
-  maxMissesCount: 5
-  typesWanted:
-  - potionName: Red
-    potionCount: 3
-  - potionName: Magenta
-    potionCount: 3
-  prefab: {fileID: 6854893510487926199, guid: 072906455b4c3ac43b13c7b4fa7f4313, type: 3}
+  maxMissesCount: 0
+  typesWanted: []
+  prefab: {fileID: 326239527686685242, guid: 87b2c264447155c4db7e2b604492ca33, type: 3}

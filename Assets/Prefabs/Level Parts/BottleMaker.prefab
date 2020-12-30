@@ -59,8 +59,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 1.222451, z: 0.8}
-  m_Center: {x: 0, y: 0.111225486, z: 0}
+  m_Size: {x: 0.8, y: 0.78, z: 0.8}
+  m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!1 &3032576103718758966
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,7 +337,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.05, z: 0.8}
+  m_Size: {x: 0.7, y: 0.11, z: 0.8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1438630578347623910
 PrefabInstance:
@@ -409,6 +409,14 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 42c7ad936e276c74fbc1581c6492c030, type: 3}
       propertyPath: m_Name
       value: Bottlemaker
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 42c7ad936e276c74fbc1581c6492c030, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3014614768876417435, guid: 42c7ad936e276c74fbc1581c6492c030, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42c7ad936e276c74fbc1581c6492c030, type: 3}

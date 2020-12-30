@@ -33,16 +33,18 @@ public class Conveyer : MonoBehaviour
 		var bodiesToPushCopy = new List<Rigidbody>(_bodiesToPush);
 		foreach (var body in bodiesToPushCopy)
 		{
-			if (body)
+			if (body && !body.IsSleeping())
 			{
-				body.MovePosition(body.position + pushForce);
 				if (!body.gameObject.activeSelf)
 				{
+					Debug.Log("removing body we no longer need to push");
 					_bodiesToPush.Remove(body);
 				}
+				body.MovePosition(body.position + pushForce);
 			}
 			else
 			{
+				Debug.Log("removing body we no longer need to push");
 				_bodiesToPush.Remove(body);
 			}
 		}

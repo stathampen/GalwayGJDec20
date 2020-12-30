@@ -211,7 +211,7 @@ public class PlayerController : MonoBehaviour
 
     private void SingleMovementStep()
     {
-        RecursivePushback(0, 2);
+        RecursivePushback(0, 5);
     }
 
     // modified from https://nightowl.games/blog/unity/custom-character-controller-in-unity/, SuperCharacterController and Unity documentation
