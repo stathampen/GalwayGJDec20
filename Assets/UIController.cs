@@ -34,7 +34,7 @@ public class UIController : MonoBehaviour
         for(int i = 1; i <= potionNo; i++)
         {
             GameObject potionPanel = Instantiate(potionPanelPrefab,
-            new Vector3(potionPanelPos.transform.position.x, potionPanelPos.transform.position.y + ( (panelHeight) * i), potionPanelPos.transform.position.z),
+            new Vector3(potionPanelPos.transform.position.x, potionPanelPos.transform.position.y + (panelHeight * i), potionPanelPos.transform.position.z),
             gameObject.transform.rotation,                                                                              //gives the panels a little gap between each
             gameObject.transform);
 
