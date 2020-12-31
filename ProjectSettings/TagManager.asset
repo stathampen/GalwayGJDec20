@@ -9,6 +9,7 @@ TagManager:
   - LevelController
   - BottleSpawner
   - PlayerSpawner
+  - PotionPanel
   layers:
   - Default
   - TransparentFX

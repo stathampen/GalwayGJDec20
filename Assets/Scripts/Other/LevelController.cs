@@ -8,6 +8,7 @@ public class LevelController : MonoBehaviour
 {
 	[SerializeField] private LevelRound [] levelRounds;
 	[SerializeField] private GameObject playerObject;
+	[SerializeField] private UIController uIController;
 
 	private GameObject _currentLevel;
 
@@ -76,7 +77,7 @@ public class LevelController : MonoBehaviour
 		//move the player back to the starting spot, which is defined in the prefab for the level layouts as PlayerStart with the PlayerSpawner tag
 		playerObject.transform.position = GameObject.FindGameObjectWithTag("PlayerSpawner").transform.position;		
 
-		//remove all the bottles currently loaded from the previous level
+		uIController.ResetUI();
 
 		foreach (var spawnerObject in spawnerObjects)
 		{
@@ -101,23 +102,27 @@ public class LevelController : MonoBehaviour
 					if(_currentSuccessesAllowed[i] > 0)
 					{
 						_currentSuccessesAllowed[i]--;
-					if(_currentSuccessesAllowed[i] == 0)
-					{
-						// advance the level routine
-						_successTable[i] = true;
-					}
-					else
-					{
-						breakLoop = true;
+
+						uIController.PopulateUI();
+
+						if(_currentSuccessesAllowed[i] == 0)
+						{
+							// advance the level routine
+							_successTable[i] = true;
+						}
+						else
+						{
+							breakLoop = true;
+						}
 					}
 				}
 				else
 				{
 					FailedPotion();
 				}
-					}
 			}
 		}
+
 
 		foreach (var success in _successTable)
 		{
@@ -134,6 +139,8 @@ public class LevelController : MonoBehaviour
 	public void FailedPotion()
 	{
 		_currentFailsAllowed--;
+
+		uIController.PopulateUI();
 
 		if(_currentFailsAllowed <= 0)
 		{
