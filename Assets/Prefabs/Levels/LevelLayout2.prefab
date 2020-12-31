@@ -109,9 +109,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1718155118864650126}
-  - {fileID: 6477761630492960188}
   - {fileID: 619455627206602496}
   - {fileID: 6661164525260708463}
+  - {fileID: 6477761630492960188}
   - {fileID: 619455626661252112}
   - {fileID: 619455627289671487}
   - {fileID: 619455627103736064}
@@ -425,7 +425,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 487752935536943011, guid: 8eed101d69cf02944b53c8c86dd2cf2f, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 487752935536943011, guid: 8eed101d69cf02944b53c8c86dd2cf2f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -433,7 +433,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487752935536943011, guid: 8eed101d69cf02944b53c8c86dd2cf2f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.477
+      value: -0.46
       objectReference: {fileID: 0}
     - target: {fileID: 487752935536943011, guid: 8eed101d69cf02944b53c8c86dd2cf2f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -471,6 +471,14 @@ PrefabInstance:
       propertyPath: potion
       value: 
       objectReference: {fileID: 11400000, guid: 6a29a211626af5a46be8044ab19580d0, type: 2}
+    - target: {fileID: 3177024738658965739, guid: 8eed101d69cf02944b53c8c86dd2cf2f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6840749078729783530, guid: 8eed101d69cf02944b53c8c86dd2cf2f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7237675679312013151, guid: 8eed101d69cf02944b53c8c86dd2cf2f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -647,7 +655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6321302114986858402, guid: 483d94eaa75f82e4f83b67c6436816af, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6321302114986858402, guid: 483d94eaa75f82e4f83b67c6436816af, type: 3}
       propertyPath: m_LocalScale.x
@@ -717,7 +725,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 238774908129272252, guid: 8c09ad261de16c84bbfba4775471b09b, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 238774908129272252, guid: 8c09ad261de16c84bbfba4775471b09b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -851,6 +859,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6854893510487926198}
     m_Modifications:
+    - target: {fileID: 1122002648521126123, guid: 483d94eaa75f82e4f83b67c6436816af, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3014699826244043337, guid: 483d94eaa75f82e4f83b67c6436816af, type: 3}
       propertyPath: m_Name
       value: Conveyer (1)
