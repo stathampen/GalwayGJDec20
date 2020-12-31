@@ -39,7 +39,7 @@ public class UIController : MonoBehaviour
 
             panelArray.Add(failPanel);
 
-        for(int i = 1; i < potionNo; i++)
+        for(int i = 1; i <= potionNo; i++)
         {
             GameObject potionPanel = Instantiate(potionPanelPrefab,
             new Vector3(potionPanelPos.transform.position.x, potionPanelPos.transform.position.y + ( (panelHeight + panelHeight/2) * i), potionPanelPos.transform.position.z),
@@ -62,11 +62,11 @@ public class UIController : MonoBehaviour
         for (int i = 1; i < panelArray.Count; i++)
         {
             panelArray[i].GetComponent<PotionPanelController>().setDisplayText(
-                levelController.GetRemainingPotions(i)
+                levelController.GetRemainingPotions(i-1)
             );
 
             panelArray[i].GetComponent<PotionPanelController>().setDisplayBottleText(
-                levelController.GetPotionName(i)
+                levelController.GetPotionName(i-1)
             );
         }
     }
