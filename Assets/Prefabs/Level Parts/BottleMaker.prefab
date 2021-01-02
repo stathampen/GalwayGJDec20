@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bottlePrefab: {fileID: 9196909645418508819, guid: 933d2c48b72b64848855ddded0d511d6, type: 3}
-  timeBetweenSpawnsSecs: 3
+  timeBetweenSpawnsSecs: 4.5
   spawnTransform: {fileID: 4808209804418963268}
   audioSource: {fileID: 6135876105453881791}
 --- !u!82 &6135876105453881791
