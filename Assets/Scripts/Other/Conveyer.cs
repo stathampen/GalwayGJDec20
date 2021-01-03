@@ -35,17 +35,30 @@ public class Conveyer : MonoBehaviour
 		{
 			if (body && !body.IsSleeping())
 			{
+
 				if (!body.gameObject.activeSelf)
 				{
-					Debug.Log("removing body we no longer need to push");
+					Debug.Log("removing body we no longer need to push because it is invalid");
 					_bodiesToPush.Remove(body);
 				}
-				body.MovePosition(body.position + pushForce);
+				var bottle = body.gameObject.GetComponent<Bottle>();
+				if (bottle.CurrentConveyor == gameObject.GetInstanceID())
+				{
+					body.MovePosition(body.position + pushForce);
+				}
 			}
 			else
 			{
 				Debug.Log("removing body we no longer need to push");
 				_bodiesToPush.Remove(body);
+				if (body)
+				{
+					var bottle = body.gameObject.GetComponent<Bottle>();
+					if (bottle.CurrentConveyor == gameObject.GetInstanceID())
+					{
+						bottle.SetConveyor(-1);
+					}
+				}
 			}
 		}
 	}
@@ -53,10 +66,18 @@ public class Conveyer : MonoBehaviour
 	private void OnTriggerEnter(Collider other)
 	{
 		var bottle = other.GetComponent<Bottle>();
-
 		if (bottle)
 		{
 			_bodiesToPush.Add(bottle.body);
+			if (bottle.CurrentConveyor < 0)
+			{
+				bottle.SetConveyor(gameObject.GetInstanceID());
+			}
+
+			if (bottle.CurrentConveyor != gameObject.GetInstanceID())
+			{
+				bottle.SetConveyor(gameObject.GetInstanceID());
+			}
 		}
 	}
 

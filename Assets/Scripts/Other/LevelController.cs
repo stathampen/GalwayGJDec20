@@ -51,7 +51,7 @@ public class LevelController : MonoBehaviour
 		_currentLevel = Instantiate(levelRounds[_currentRound].prefab);
 
 		_currentFailsAllowed = levelRounds[_currentRound].maxMissesCount;
-		
+
 		for (var i = 0; i < levelRounds[_currentRound].typesWanted.Length; i++)
 		{
 			_currentSuccessesAllowed[i] = levelRounds[_currentRound].typesWanted[i].potionCount;
@@ -74,7 +74,7 @@ public class LevelController : MonoBehaviour
 		var spawnerObjects = GameObject.FindGameObjectsWithTag("BottleSpawner");
 
 		//move the player back to the starting spot, which is defined in the prefab for the level layouts as PlayerStart with the PlayerSpawner tag
-		playerObject.transform.position = GameObject.FindGameObjectWithTag("PlayerSpawner").transform.position;		
+		playerObject.transform.position = GameObject.FindGameObjectWithTag("PlayerSpawner").transform.position;
 
 		//remove all the bottles currently loaded from the previous level
 
@@ -98,25 +98,30 @@ public class LevelController : MonoBehaviour
 				if (potionName == levelRounds[_currentRound].typesWanted[i].potionName)
 				{
 					//AND still want more of those potions
-					if(_currentSuccessesAllowed[i] > 0)
+					if (_currentSuccessesAllowed[i] > 0)
 					{
 						_currentSuccessesAllowed[i]--;
-					if(_currentSuccessesAllowed[i] == 0)
-					{
-						// advance the level routine
-						_successTable[i] = true;
+						if(_currentSuccessesAllowed[i] == 0)
+						{
+							// advance the level routine
+							_successTable[i] = true;
+						}
+						else
+						{
+							breakLoop = true;
+						}
 					}
 					else
 					{
-						breakLoop = true;
+						FailedPotion();
 					}
 				}
-				else
-				{
-					FailedPotion();
-				}
-					}
 			}
+		}
+
+		if (!breakLoop)
+		{
+			FailedPotion();
 		}
 
 		foreach (var success in _successTable)

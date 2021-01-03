@@ -7,11 +7,13 @@ public class ExitChute : MonoBehaviour
     public AudioSource audioSource;
 	private LevelController levelController;
 
-    private void Start() {
-        try {
+    private void Start()
+    {
+        try
+        {
 			levelController = GameObject.Find("The God Monobehaviour").GetComponent<LevelController>();
 		}
-		catch
+		catch // this is the work of satan, but we don't really have time to change it
 		{
 			Debug.Log("EXIT CHUTE MISSING LEVEL CONTROLLER");
 		}

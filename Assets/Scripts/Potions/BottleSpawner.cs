@@ -16,6 +16,11 @@ public class BottleSpawner : MonoBehaviour
 		set;
 	}
 
+	private void Awake()
+	{
+		_timer = timeBetweenSpawnsSecs;
+	}
+
 	private void Update()
 	{
 		if (CanSpawnBottles)
@@ -24,13 +29,12 @@ public class BottleSpawner : MonoBehaviour
 
 			if (_timer >= timeBetweenSpawnsSecs)
 			{
-				
+
 				audioSource.Play();
 				var bottle = Instantiate(bottlePrefab, spawnTransform.position, spawnTransform.rotation);
 				bottle.GetComponent<Bottle>().Init();
 
 				_timer = 0.0f;
-
 			}
 		}
 	}

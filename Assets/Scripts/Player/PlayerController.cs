@@ -141,15 +141,18 @@ public class PlayerController : MonoBehaviour
                             {
                                 conveyerToUse = conveyer;
                                 convenyerCollider = col;
-                            }
-
-                            if (convenyerCollider &&
-                                Vector3.Distance(position, convenyerCollider.transform.position) >
+                            } else if (Vector3.Distance(position, convenyerCollider.transform.position) >
                                 Vector3.Distance(position, col.transform.position))
                             {
                                 conveyerToUse = conveyer;
                                 convenyerCollider = col;
                             }
+                        }
+                        // bottle stops placement
+                        else if (col.GetComponent<Bottle>())
+                        {
+                            conveyerToUse = null;
+                            break;
                         }
                     }
                 }
@@ -211,7 +214,7 @@ public class PlayerController : MonoBehaviour
 
     private void SingleMovementStep()
     {
-        RecursivePushback(0, 5);
+        RecursivePushback(0, 2);
     }
 
     // modified from https://nightowl.games/blog/unity/custom-character-controller-in-unity/, SuperCharacterController and Unity documentation
@@ -235,8 +238,8 @@ public class PlayerController : MonoBehaviour
 
                     if (pushbackVector == Vector3.zero) continue;
                     if (Physics.SphereCast(new Ray(spherePosition, pushbackVector.normalized),
-                        0.01f,
-                        pushbackVector.magnitude + 0.01f))
+                        0.05f,
+                        pushbackVector.magnitude + 0.05f))
                     {
                         if (Vector3.Distance(spherePosition, contactPoint) < CapsuleRadius)
                         {
@@ -255,14 +258,24 @@ public class PlayerController : MonoBehaviour
 
                     contact = true;
 
+                    if (pushbackVector.y > 0)
+                    {
+                        pushbackVector.y = 0;
+                    }
+
                     transform.position += pushbackVector;
                 }
+            }
+
+            if (transform.position.y < 0)
+            {
+                transform.position = new Vector3(transform.position.x, 0, transform.position.z);
             }
 
 
             if (depth < maxDepth && contact)
             {
-                depth = depth + 1;
+                depth++;
                 continue;
             }
 

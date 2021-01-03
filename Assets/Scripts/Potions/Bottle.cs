@@ -17,6 +17,12 @@ public class Bottle : MonoBehaviour
 
 	private Transform _transformToFollow;
 
+	public int CurrentConveyor
+	{
+		get;
+		private set;
+	} = -1;
+
 	public Potion Potion
 	{
 		get;
@@ -34,6 +40,7 @@ public class Bottle : MonoBehaviour
 		_transformToFollow = transformToFollow;
 		body.mass = 0;
 		body.detectCollisions = false;
+		CurrentConveyor = -1;
 		body.Sleep();
 	}
 
@@ -76,6 +83,11 @@ public class Bottle : MonoBehaviour
 		_levelController.FailedPotion();
 
 		Destroy(gameObject);
+	}
+
+	public void SetConveyor(int instanceId)
+	{
+		CurrentConveyor = instanceId;
 	}
 
 	private void Start() {
