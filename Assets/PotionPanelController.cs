@@ -9,14 +9,14 @@ public class PotionPanelController : MonoBehaviour
     public TextMeshProUGUI countText;
     public TextMeshProUGUI bottleText;
 
-    public void setDisplayText(int _potionCount)
+    public void SetDisplayText(int potionCount)
     {
-        countText.text = _potionCount + " X ";
+        countText.text = potionCount + " X ";
     }
 
-    public void setDisplayBottleText(string _potionName)
+    public void SetDisplayBottleText(string potionName)
     {
-        bottleText.text = _potionName;
+        bottleText.text = potionName;
     }
 
 }

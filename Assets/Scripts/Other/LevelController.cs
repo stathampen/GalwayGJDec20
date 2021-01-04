@@ -8,6 +8,7 @@ public class LevelController : MonoBehaviour
 {
 	[SerializeField] private LevelRound [] levelRounds;
 	[SerializeField] private GameObject playerObject;
+	[SerializeField] private UiTransitionController transitionController;
 
 	private GameObject _currentLevel;
 
@@ -20,6 +21,13 @@ public class LevelController : MonoBehaviour
 	private readonly int[] _currentSuccessesAllowed = new int[10];
 
 	private bool[] _successTable = new bool[10];
+
+	private float _fixedDeltaTime;
+
+	void Awake()
+	{
+		_fixedDeltaTime = Time.fixedDeltaTime;
+	}
 
 	public void OnEnable()
 	{
@@ -173,7 +181,7 @@ public class LevelController : MonoBehaviour
 		if(_currentRound < levelRounds.Length - 1)
 		{
 			_currentRound++; //to the next round
-			LoadLevel();
+			DoTransition();
 		}
 		else
 		{
@@ -184,6 +192,17 @@ public class LevelController : MonoBehaviour
 			_bottleSpawners.Clear();
 			SceneManager.LoadScene("FinalScene");
 		}
+	}
+
+	private void DoTransition()
+	{
+		Time.timeScale = 0.0f;
+		Time.fixedDeltaTime = _fixedDeltaTime * Time.timeScale;
+		transitionController.BeginTransition(LoadLevel, () =>
+		{
+			Time.timeScale = 1.0f;
+			Time.fixedDeltaTime = _fixedDeltaTime * Time.timeScale;
+		});
 	}
 
 	private void EndGame()
