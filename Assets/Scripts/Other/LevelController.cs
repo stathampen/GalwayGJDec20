@@ -201,7 +201,6 @@ public class LevelController : MonoBehaviour
 		{
 			spawner.CanSpawnBottles = false;
 		}
-		Debug.Log("END GAME");
 		SceneManager.LoadScene("FinalScene");
 	}
 }
