@@ -20,3 +20,4 @@ MonoBehaviour:
     potionCount: 3
   - potionName: Blue
     potionCount: 3
+  prefab: {fileID: 326239527686685242, guid: 87b2c264447155c4db7e2b604492ca33, type: 3}

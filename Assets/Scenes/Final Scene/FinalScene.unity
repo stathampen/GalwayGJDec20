@@ -715,6 +715,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 48936219219008141, guid: d25230a8168e71e49a4c8d2017f642ce, type: 3}
+      propertyPath: raycastRadius
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 48936219219008178, guid: d25230a8168e71e49a4c8d2017f642ce, type: 3}
       propertyPath: m_Name
       value: Player
@@ -953,7 +957,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelRounds:
-  - {fileID: 11400000, guid: 6ce241dde52f6ad4594667c93a259067, type: 2}
+  - {fileID: 11400000, guid: 7cc89ec6d682769468ec06e9b1d7bf36, type: 2}
   - {fileID: 11400000, guid: 6ce241dde52f6ad4594667c93a259067, type: 2}
   - {fileID: 11400000, guid: 7cc89ec6d682769468ec06e9b1d7bf36, type: 2}
   playerObject: {fileID: 1177668065}
