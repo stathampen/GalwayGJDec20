@@ -82,6 +82,15 @@ public class LevelController : MonoBehaviour
 		playerUI.MakePanels();
 
 
+
+		var bottles = GameObject.FindGameObjectsWithTag("PotionBottle");
+
+		foreach (var bottle in bottles)
+		{
+			bottle.SetActive(false);
+			Destroy(bottle);
+		}
+
 		var spawnerObjects = GameObject.FindGameObjectsWithTag("BottleSpawner");
 
 		//move the player back to the starting spot, which is defined in the prefab for the level layouts as PlayerStart with the PlayerSpawner tag

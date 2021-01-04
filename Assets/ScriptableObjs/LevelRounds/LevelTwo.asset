@@ -16,6 +16,6 @@ MonoBehaviour:
   typesWanted:
   - potionName: Red
     potionCount: 3
-  - potionName: Purple
+  - potionName: Magenta
     potionCount: 3
   prefab: {fileID: 6854893510487926199, guid: 072906455b4c3ac43b13c7b4fa7f4313, type: 3}
