@@ -639,11 +639,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2613773085178669388, guid: 5b8ea3a2d6e20fc48b6684042df56e54, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.92401814
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 2613773085178669388, guid: 5b8ea3a2d6e20fc48b6684042df56e54, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.5600555
+      value: 3.562055
       objectReference: {fileID: 0}
     - target: {fileID: 2613773085178669388, guid: 5b8ea3a2d6e20fc48b6684042df56e54, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1661,6 +1661,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6247319663639218548}
     m_Modifications:
+    - target: {fileID: 1772898854341970552, guid: 7c8652c0da08bdc48a584bb107ad9307, type: 3}
+      propertyPath: m_Size.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1772898854341970552, guid: 7c8652c0da08bdc48a584bb107ad9307, type: 3}
+      propertyPath: m_Center.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5824590997228196118, guid: 7c8652c0da08bdc48a584bb107ad9307, type: 3}
       propertyPath: m_Name
       value: BasicWall (14)

@@ -9,13 +9,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform bottleHoldPoint;
     [SerializeField] private CapsuleCollider capsuleCollider;
 
-    public Vector3 CapsuleCentre => capsuleCollider.center;
     public float CapsuleRadius => capsuleCollider.radius;
     public float CapsuleHeight => capsuleCollider.height;
 
     private readonly Collider[] _colliders = new Collider[16];
 
-    private List<float> _sphereOffsets = new List<float>();
+    private readonly List<float> _sphereOffsets = new List<float>();
 
     public Bottle Bottle
     {
@@ -37,6 +36,8 @@ public class PlayerController : MonoBehaviour
             currentOffset += CapsuleRadius;
             _sphereOffsets.Add(currentOffset);
         }
+
+        capsuleCollider.enabled = false;
     }
 
     private void Update()
@@ -114,7 +115,6 @@ public class PlayerController : MonoBehaviour
 
                 if (bottleToGrab)
                 {
-                    // todo do something to bottle
                     // let's pass in a transform point to hold the bottle
                     bottleToGrab.Grab(bottleHoldPoint);
                     Bottle = bottleToGrab;
@@ -238,8 +238,8 @@ public class PlayerController : MonoBehaviour
 
                     if (pushbackVector == Vector3.zero) continue;
                     if (Physics.SphereCast(new Ray(spherePosition, pushbackVector.normalized),
-                        0.05f,
-                        pushbackVector.magnitude + 0.05f))
+                        0.01f,
+                        pushbackVector.magnitude + 0.01f))
                     {
                         if (Vector3.Distance(spherePosition, contactPoint) < CapsuleRadius)
                         {
@@ -267,7 +267,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if (transform.position.y < 0)
+            if (transform.position.y != 0)
             {
                 transform.position = new Vector3(transform.position.x, 0, transform.position.z);
             }
@@ -328,35 +328,4 @@ public class PlayerController : MonoBehaviour
         contactPoint = Vector3.zero;
         return false;
     }
-
-    /*
-    [CustomEditor(typeof(PlayerController))]
-    public class DrawCapsule : Editor
-    {
-        private void OnSceneGUI()
-        {
-            var obj = (PlayerController) target;
-            // drawing wire script from https://forum.unity.com/threads/drawing-capsule-gizmo.354634/
-            var angleMatrix = Matrix4x4.TRS(obj.transform.position + obj.CapsuleCentre, obj.transform.rotation, Handles.matrix.lossyScale);
-            Handles.color = Color.blue;
-            using (new Handles.DrawingScope(angleMatrix))
-            {
-                var radius = obj.CapsuleRadius;
-                var pointOffset = (obj.CapsuleHeight - (radius * 2)) / 2;
-                //draw sideways
-                Handles.DrawWireArc(Vector3.up * pointOffset, Vector3.left, Vector3.back, -180, radius);
-                Handles.DrawLine(new Vector3(0, pointOffset, -radius), new Vector3(0, -pointOffset, -radius));
-                Handles.DrawLine(new Vector3(0, pointOffset, radius), new Vector3(0, -pointOffset, radius));
-                Handles.DrawWireArc(Vector3.down * pointOffset, Vector3.left, Vector3.back, 180, radius);
-                //draw frontways
-                Handles.DrawWireArc(Vector3.up * pointOffset, Vector3.back, Vector3.left, 180, radius);
-                Handles.DrawLine(new Vector3(-radius, pointOffset, 0), new Vector3(-radius, -pointOffset, 0));
-                Handles.DrawLine(new Vector3(radius, pointOffset, 0), new Vector3(radius, -pointOffset, 0));
-                Handles.DrawWireArc(Vector3.down * pointOffset, Vector3.back, Vector3.left, -180, radius);
-                //draw center
-                Handles.DrawWireDisc(Vector3.up * pointOffset, Vector3.up, radius);
-                Handles.DrawWireDisc(Vector3.down * pointOffset, Vector3.up, radius);
-            }
-        }
-    }*/
 }
