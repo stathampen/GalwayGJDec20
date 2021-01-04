@@ -10,7 +10,7 @@ public class UiTransitionController : MonoBehaviour
 	private float _targetTime;
 	private Action _endTransitionCallback;
 
-	void Update()
+	private void Update()
 	{
 		if (_isTransitioning)
 		{

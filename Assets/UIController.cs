@@ -33,7 +33,7 @@ public class UIController : MonoBehaviour
             gameObject.transform.rotation,                                                                              //gives the panels a little gap between each
             gameObject.transform);
 
-            failPanel.GetComponent<PotionPanelController>().setDisplayBottleText(
+            failPanel.GetComponent<PotionPanelController>().SetDisplayBottleText(
                 "Misses Allowed"
             );
 
@@ -55,17 +55,17 @@ public class UIController : MonoBehaviour
     private void PopulateUI()
     {
 
-        panelArray[0].GetComponent<PotionPanelController>().setDisplayText(
+        panelArray[0].GetComponent<PotionPanelController>().SetDisplayText(
                 levelController.GetRemainingMisses()
             );
 
         for (int i = 1; i < panelArray.Count; i++)
         {
-            panelArray[i].GetComponent<PotionPanelController>().setDisplayText(
+            panelArray[i].GetComponent<PotionPanelController>().SetDisplayText(
                 levelController.GetRemainingPotions(i)
             );
 
-            panelArray[i].GetComponent<PotionPanelController>().setDisplayBottleText(
+            panelArray[i].GetComponent<PotionPanelController>().SetDisplayBottleText(
                 levelController.GetPotionName(i)
             );
         }
