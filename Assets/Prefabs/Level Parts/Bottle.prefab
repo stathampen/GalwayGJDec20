@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2208844047094562072}
   - component: {fileID: 4284566829896808676}
   - component: {fileID: 1886744483705853417}
-  - component: {fileID: 1709671872648986454}
+  - component: {fileID: 1675909609208978737}
   m_Layer: 0
   m_Name: Cone
   m_TagString: Untagged
@@ -82,8 +82,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1709671872648986454
-SphereCollider:
+--- !u!136 &1675909609208978737
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,9 +92,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.00483323
-  m_Center: {x: 0, y: 1.976229e-16, z: -0.042833228}
+  m_Radius: 0.0025065923
+  m_Height: 0.00932488
+  m_Direction: 2
+  m_Center: {x: 0, y: -0.000018275427, z: -0.04290379}
 --- !u!1 &9196909645418508819
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +169,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 48
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &1863911392
 BoxCollider:
@@ -181,8 +182,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.13, y: 0.16611207, z: 0.18}
-  m_Center: {x: 0, y: 0.030577257, z: 0}
+  m_Size: {x: 0.16774979, y: 0.16611207, z: 0.15940118}
+  m_Center: {x: -0.0017238744, y: 0.030577257, z: -0.0024522245}
 --- !u!1 &9196909645688898077
 GameObject:
   m_ObjectHideFlags: 0
