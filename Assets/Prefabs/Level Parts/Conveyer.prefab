@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c0603e0a51c42e7b0c1e14202a8f920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedOfConveyer: 0.25
+  speedOfConveyer: 0.3
   canPutBottleOn: 1
 --- !u!1 &2577095582355096117
 GameObject:
