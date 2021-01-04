@@ -1544,7 +1544,7 @@ GameObject:
   - component: {fileID: 8824107300814983714}
   - component: {fileID: 598095006902122956}
   m_Layer: 5
-  m_Name: Button
+  m_Name: QuitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2117,6 +2117,7 @@ MonoBehaviour:
   titlePanel: {fileID: 849168124448414230}
   playerUIPanel: {fileID: 887079639}
   gameSceneObject: {fileID: 791532432}
+  playButton: {fileID: 7061626450992088632}
 --- !u!224 &7419433796648404205
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2208,7 +2209,7 @@ GameObject:
   - component: {fileID: 7061626450992088632}
   - component: {fileID: 3549481269392149825}
   m_Layer: 5
-  m_Name: Button
+  m_Name: PlayButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

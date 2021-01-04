@@ -15,6 +15,7 @@ namespace Menus
 		[SerializeField] private GameObject titlePanel;
 		[SerializeField] private GameObject playerUIPanel;
 		[SerializeField] private GameObject gameSceneObject;
+		[SerializeField] private Button playButton;
 
 		private Image _panelImage;
 		private TextMeshProUGUI _panelText;
@@ -32,6 +33,7 @@ namespace Menus
 
 		public void PlayButtonClicked()
 		{
+			playButton.interactable = false;
 			instructionsPanel.SetActive(true);
 			_panelImage = instructionsPanel.GetComponent<Image>();
 			_panelText = instructionsPanel.GetComponentInChildren<TextMeshProUGUI>();
