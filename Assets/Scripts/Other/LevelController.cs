@@ -129,14 +129,12 @@ public class LevelController : MonoBehaviour
 							// advance the level routine
 							_successTable[i] = true;
 						}
-						else
-						{
-							breakLoop = true;
-						}
 					}
 					else
 					{
 						FailedPotion();
+						breakLoop = true;
+
 					}
 				}
 			}
