@@ -6,6 +6,7 @@ public class LevelController : MonoBehaviour
 {
 	[SerializeField] private LevelRound [] levelRounds;
 	[SerializeField] private GameObject playerObject;
+	[SerializeField] private UIController playerUI;
 	[SerializeField] private UiTransitionController transitionController;
 	[SerializeField] private GameObject gameOverMenu;
 
@@ -70,13 +71,16 @@ public class LevelController : MonoBehaviour
 			_successTable[i] = false;
 		}
 
-		var bottles = GameObject.FindGameObjectsWithTag("PotionBottle");
+		var panels = GameObject.FindGameObjectsWithTag("PotionPanel");
 
-		foreach (var bottle in bottles)
+		foreach (var panel in panels)
 		{
-			bottle.SetActive(false);
-			Destroy(bottle);
+			panel.SetActive(false);
+			Destroy(panel);
 		}
+
+		playerUI.MakePanels();
+
 
 		var spawnerObjects = GameObject.FindGameObjectsWithTag("BottleSpawner");
 
@@ -108,6 +112,9 @@ public class LevelController : MonoBehaviour
 					if (_currentSuccessesAllowed[i] > 0)
 					{
 						_currentSuccessesAllowed[i]--;
+
+						playerUI.UpdatePanels();
+
 						if(_currentSuccessesAllowed[i] == 0)
 						{
 							// advance the level routine
@@ -146,6 +153,8 @@ public class LevelController : MonoBehaviour
 	public void FailedPotion()
 	{
 		_currentFailsAllowed--;
+
+		playerUI.UpdatePanels();
 
 		if(_currentFailsAllowed <= 0)
 		{
