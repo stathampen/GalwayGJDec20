@@ -13,5 +13,11 @@ MonoBehaviour:
   m_Name: LevelThree
   m_EditorClassIdentifier: 
   maxMissesCount: 0
-  typesWanted: []
+  typesWanted:
+  - potionName: Green
+    potionCount: 5
+  - potionName: Yellow
+    potionCount: 3
+  - potionName: Purple
+    potionCount: 2
   prefab: {fileID: 326239527686685242, guid: 87b2c264447155c4db7e2b604492ca33, type: 3}

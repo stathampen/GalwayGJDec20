@@ -14,15 +14,26 @@ public class UIController : MonoBehaviour
 
     //get how many potions are still wanted in the level
 
-    private void Start() {
-        MakePanels();
-    }
-    private void Update() {
+    // private void Awake() {
+    //     MakePanels();
+    // }
+
+    public void UpdatePanels()
+    {
         PopulateUI();
     }
 
     public void MakePanels()
     {
+        panelArray = new List<GameObject>();
+        var bottles = GameObject.FindGameObjectsWithTag("PotionBottle");
+
+		foreach (var bottle in bottles)
+		{
+			bottle.SetActive(false);
+			Destroy(bottle);
+		}
+
         int potionNo = levelController.GetListPotions();
 
         float panelHeight = potionPanelPrefab.GetComponent<RectTransform>().rect.height;
@@ -39,10 +50,10 @@ public class UIController : MonoBehaviour
 
             panelArray.Add(failPanel);
 
-        for(int i = 1; i < potionNo; i++)
+        for(int i = 0; i < potionNo; i++)
         {
             GameObject potionPanel = Instantiate(potionPanelPrefab,
-            new Vector3(potionPanelPos.transform.position.x, potionPanelPos.transform.position.y + ( (panelHeight + panelHeight/2) * i), potionPanelPos.transform.position.z),
+            new Vector3(potionPanelPos.transform.position.x, potionPanelPos.transform.position.y + ((panelHeight + 30) * (i + 1)), potionPanelPos.transform.position.z),
             gameObject.transform.rotation,                                                                              //gives the panels a little gap between each
             gameObject.transform);
 
@@ -61,12 +72,15 @@ public class UIController : MonoBehaviour
 
         for (int i = 1; i < panelArray.Count; i++)
         {
+            Debug.Log("panel " + i);
+            Debug.Log("panel Name " + i);
             panelArray[i].GetComponent<PotionPanelController>().setDisplayText(
-                levelController.GetRemainingPotions(i)
+                levelController.GetRemainingPotions(i-1)
             );
 
+            Debug.Log("Count " + i);
             panelArray[i].GetComponent<PotionPanelController>().setDisplayBottleText(
-                levelController.GetPotionName(i)
+                levelController.GetPotionName(i-1)
             );
         }
     }
