@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +7,8 @@ public class LevelController : MonoBehaviour
 	[SerializeField] private LevelRound [] levelRounds;
 	[SerializeField] private GameObject playerObject;
 	[SerializeField] private UIController playerUI;
+	[SerializeField] private UiTransitionController transitionController;
+	[SerializeField] private GameObject gameOverMenu;
 
 	private GameObject _currentLevel;
 
@@ -21,6 +21,13 @@ public class LevelController : MonoBehaviour
 	private readonly int[] _currentSuccessesAllowed = new int[10];
 
 	private bool[] _successTable = new bool[10];
+
+	private float _fixedDeltaTime;
+
+	void Awake()
+	{
+		_fixedDeltaTime = Time.fixedDeltaTime;
+	}
 
 	public void OnEnable()
 	{
@@ -151,7 +158,7 @@ public class LevelController : MonoBehaviour
 
 		if(_currentFailsAllowed <= 0)
 		{
-			EndGame();
+			GameOver();
 		}
 	}
 
@@ -182,25 +189,42 @@ public class LevelController : MonoBehaviour
 		if(_currentRound < levelRounds.Length - 1)
 		{
 			_currentRound++; //to the next round
-			LoadLevel();
+			DoTransition();
 		}
 		else
 		{
-			foreach (var spawner in _bottleSpawners)
-			{
-				spawner.CanSpawnBottles = false;
-			}
-			_bottleSpawners.Clear();
-			SceneManager.LoadScene("FinalScene");
+			GameOver();
 		}
 	}
 
-	private void EndGame()
+	private void DoTransition()
 	{
+		Time.timeScale = 0.0f;
+		Time.fixedDeltaTime = _fixedDeltaTime * Time.timeScale;
+		transitionController.BeginTransition(LoadLevel, () =>
+		{
+			Time.timeScale = 1.0f;
+			Time.fixedDeltaTime = _fixedDeltaTime * Time.timeScale;
+		});
+	}
+
+	private void GameOver()
+	{
+		Time.timeScale = 0.0f;
+		Time.fixedDeltaTime = _fixedDeltaTime * Time.timeScale;
 		foreach (var spawner in _bottleSpawners)
 		{
 			spawner.CanSpawnBottles = false;
 		}
+		gameOverMenu.SetActive(true);
+	}
+
+	public void EndGame()
+	{
+		gameOverMenu.SetActive(false);
+		Time.timeScale = 1.0f;
+		Time.fixedDeltaTime = _fixedDeltaTime * Time.timeScale;
+		Debug.Log("END GAME");
 		SceneManager.LoadScene("FinalScene");
 	}
 }
