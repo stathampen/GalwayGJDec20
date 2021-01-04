@@ -4,6 +4,9 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Bottle : MonoBehaviour
 {
+	[SerializeField] private GameObject explosionPrefab;
+	[SerializeField] private Collider objCollider;
+
 	public Potion [] potions;
 
 	public GameObject bottleModel;
@@ -11,9 +14,6 @@ public class Bottle : MonoBehaviour
 	public Rigidbody body;
 
 	private LevelController _levelController;
-
-	[SerializeField] private GameObject explosionPrefab;
-	[SerializeField] private Collider objCollider;
 
 	private Transform _transformToFollow;
 
