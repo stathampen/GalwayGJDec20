@@ -129,6 +129,8 @@ public class LevelController : MonoBehaviour
 							// advance the level routine
 							_successTable[i] = true;
 						}
+
+						breakLoop = true;
 					}
 					else
 					{
